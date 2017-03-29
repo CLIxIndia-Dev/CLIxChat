@@ -219,7 +219,7 @@ bot.message_loop({'chat': on_chat_message #,
 def index(request):
     print('request post:', request.POST)
 
-    for key, value in request.POST.items() :
+    for key, value in request.items() :
         print ('KV:', key, value)
 
     if 'data' in request.POST:
