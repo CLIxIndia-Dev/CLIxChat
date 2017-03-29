@@ -3,10 +3,12 @@ appdirs==1.4.3
 async-timeout==1.2.0
 chardet==2.3.0
 Django==1.10.6
+gunicorn==19.7.1
 multidict==2.1.4
 packaging==16.8
 psycopg2==2.7.1
 pyparsing==2.2.0
+queuelib==1.4.2
 six==1.10.0
 telepot==10.5
 urllib3==1.20
