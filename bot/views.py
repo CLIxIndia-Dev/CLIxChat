@@ -217,7 +217,7 @@ bot.message_loop({'chat': on_chat_message #,
                   }, source=update_queue)  # take updates from queue
 
 def index(request):
-    print('request:', request.data)
+    print('request:', request)
     if 'data' in request:
         update_queue.put(request.data)  # pass update to bot
 
