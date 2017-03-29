@@ -25,7 +25,8 @@ SECRET_KEY = '_3tesle#!i$x)yls=q#)ozo5hirb0@4shvap84ojdwhn%0ctc8'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['clixchat.herokuapp.com']
+ALLOWED_HOSTS = ['clixchat.herokuapp.com',
+                 'localhost']
 
 
 # Application definition
