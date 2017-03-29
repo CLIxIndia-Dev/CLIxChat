@@ -217,12 +217,10 @@ bot.message_loop({'chat': on_chat_message #,
                   }, source=update_queue)  # take updates from queue
 
 def index(request):
-    print('request post:', request.POST)
+    print('request post:', request.body)
 
-    for key in request.POST :
-        print ('Key:', key)
 
-    if 'data' in request.POST:
+    if 'data' in request.body:
         update_queue.put(request.POST.data)  # pass update to bot
 
     return HttpResponse("Hello, world. You're at the bot index.")
