@@ -220,8 +220,7 @@ def index(request):
     print('request post:', request.body)
 
 
-    if 'data' in request.body:
-        update_queue.put(request.body.data)  # pass update to bot
+    update_queue.put(request.body)  # pass update to bot
 
     return HttpResponse("Hello, world. You're at the bot index.")
 
