@@ -4,8 +4,8 @@ from django.shortcuts import render
 from django.http import HttpResponse
 
 
-def index(request):
-    return HttpResponse("Hello, world. You're at the bot index.")
+# def index(request):
+#     return HttpResponse("Hello, world. You're at the bot index.")
 #
 # from django.core.context_processors import csrf
 # from django.shortcuts import render_to_response
@@ -217,7 +217,9 @@ bot.message_loop({'chat': on_chat_message #,
                   }, source=update_queue)  # take updates from queue
 
 def index(request):
-    update_queue.put(request.data)  # pass update to bot
+    if 'data' in request:
+        update_queue.put(request.data)  # pass update to bot
+
     return HttpResponse("Hello, world. You're at the bot index.")
 
 # @app.route('/abc', methods=['GET', 'POST'])
