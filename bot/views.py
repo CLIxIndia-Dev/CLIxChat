@@ -183,30 +183,6 @@ def on_chat_message(msg):
     elif content_type == 'text':
         bot.sendMessage(chat_id, msg['text'])
 
-# def on_callback_query(msg):
-#     query_id, from_id, data = telepot.glance(msg, flavor='callback_query')
-#     print('Callback query:', query_id, from_id, data)
-#     bot.answerCallbackQuery(query_id, text='Got it')
-
-# # need `/setinline`
-# def on_inline_query(msg):
-#     query_id, from_id, query_string = telepot.glance(msg, flavor='inline_query')
-#     print('Inline Query:', query_id, from_id, query_string)
-
-#     # Compose your own answers
-#     articles = [{'type': 'article',
-#                     'id': 'abc', 'title': 'ABC', 'message_text': 'Good morning'}]
-
-#     bot.answerInlineQuery(query_id, articles)
-
-# # need `/setinlinefeedback`
-# def on_chosen_inline_result(msg):
-#     result_id, from_id, query_string = telepot.glance(msg, flavor='chosen_inline_result')
-#     print('Chosen Inline Result:', result_id, from_id, query_string)
-
-
-
-# app = Flask(__name__)
 bot = telepot.Bot(TOKEN)
 update_queue = Queue()  # channel between `app` and `bot`
 
@@ -223,13 +199,3 @@ def index(request):
     update_queue.put(request.body)  # pass update to bot
 
     return HttpResponse("Hello, world. You're at the bot index.")
-
-# @app.route('/abc', methods=['GET', 'POST'])
-# def pass_update():
-#     update_queue.put(request.data)  # pass update to bot
-#     return 'OK'
-#
-# if __name__ == '__main__':
-#     bot.setWebhook(URL)
-#     app.run(port=PORT, debug=True)
-
