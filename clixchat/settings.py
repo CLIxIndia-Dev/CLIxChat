@@ -153,7 +153,7 @@ STATICFILES_FINDERS = (
 
 # Extra places for collectstatic to find static files.
 STATICFILES_DIRS = (
-    os.path.join(PROJECT_ROOT, 'adminstatic'),
+    os.path.join(PROJECT_ROOT, 'static'),
 )
 
 
