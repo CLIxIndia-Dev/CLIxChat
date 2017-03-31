@@ -54,7 +54,7 @@ def on_chat_message(msg):
     print('response:', response)
     for x in response:
         print('resp:', x)
-        bot.sendMessage(chat_id, x)
+        bot.sendMessage(chat_id, x.response_text)
 
     #
     #
