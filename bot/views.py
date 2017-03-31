@@ -54,120 +54,126 @@ def on_chat_message(msg):
     print('response:', response)
     for x in response:
         print('resp:', x)
+        bot.sendMessage(chat_id, x)
 
-    inline_links = InlineKeyboardMarkup(inline_keyboard=[
-                   [InlineKeyboardButton(text='Architecture',
-                                         url='https://www.edx.org/course/subject/architecture')],
-                   [InlineKeyboardButton(text='Chemistry',
-                                         url='https://www.edx.org/course/subject/chemistry')],
-                   [InlineKeyboardButton(text='History',
-                                         url='https://www.edx.org/course/subject/history')]
-               ])
+    #
+    #
+    # inline_links = InlineKeyboardMarkup(inline_keyboard=[
+    #                [InlineKeyboardButton(text='Architecture',
+    #                                      url='https://www.edx.org/course/subject/architecture')],
+    #                [InlineKeyboardButton(text='Chemistry',
+    #                                      url='https://www.edx.org/course/subject/chemistry')],
+    #                [InlineKeyboardButton(text='History',
+    #                                      url='https://www.edx.org/course/subject/history')]
+    #            ])
+    #
+    # if content_type == 'text' and msg['text'] in links.keys(): # if user enters key word
+    # 	bot.sendMessage(chat_id, links[msg['text']])
+    #
+    # elif content_type == 'text' and msg['text'] == '/courses':
+    #     bot.sendMessage(chat_id, 'Please select a course', reply_markup=inline_links)
+    #
+    # elif content_type == 'text' and msg['text'] == '/kbtest':
+    #     bot.sendMessage(chat_id, 'testing custom keyboard',
+    #                         reply_markup=ReplyKeyboardMarkup(
+    #                             keyboard=[
+    #                                 [KeyboardButton(text="Yes"), KeyboardButton(text="No")]]))
+    # elif content_type == 'text' and (msg['text'] == '/start'):
+    #     bot.sendMessage(chat_id, 'Course Materials or FAQ?',
+    #                     reply_markup=ReplyKeyboardMarkup(
+    #                         keyboard=[[KeyboardButton(text="Course Materials")],
+    #                                   [KeyboardButton(text="FAQ")]],
+    #                         one_time_keyboard=True))
+    #
+    # ### Course Materials ###
+    #
+    # elif content_type == 'text' and msg['text'] == 'Course Materials':
+    #     print(chat_id)
+    #     bot.sendMessage(chat_id,
+    #                     'I am here to help you access course materials! What course are you taking?',
+    #                     reply_markup=ReplyKeyboardMarkup(
+    #                         keyboard=[[KeyboardButton(text="ICT")],
+    #                                   [KeyboardButton(text="English")],
+    #                                   [KeyboardButton(text="Math")],
+    #                                   [KeyboardButton(text="Science")]],
+    #                         one_time_keyboard=True,))
+    #
+    # elif content_type == 'text' and (msg['text'] == 'ICT' or msg['text'] == 'English' or msg['text'] == 'Math' or msg['text'] == 'Science'):
+    #     numUnits = getNumUnits(msg['text'])
+    #     keyboard= makeUnitKeyboard(msg['text'], numUnits)
+    #     bot.sendMessage(chat_id,
+    #                     'Select your unit.',
+    #                     reply_markup=keyboard)
+    #
+    # elif content_type == 'text' and ("Unit" in msg['text']):
+    #     course = msg['text'].split(' ')[0] # get course name
+    #     numSessions = getNumSessions(course)
+    #     keyboard = makeSessionsKeyboard(course, numSessions)
+    #     bot.sendMessage(chat_id,
+    #                     'Select your session.',
+    #                     reply_markup=keyboard)
+    #
+    # elif content_type == 'text' and ("Session 1" in msg['text']):
+    #     bot.sendMessage(chat_id, 'To see that content you must log in to openedx on a computer.')
+    #
+    # # all other sessions for now have hardcoded activities
+    # elif content_type == 'text' and ("Session" in msg['text']):
+    #     bot.sendMessage(chat_id,
+    #                     'Select an activity.',
+    #                     reply_markup=ReplyKeyboardMarkup(
+    #                         keyboard=[[KeyboardButton(text="Message text here!")],
+    #                                   [KeyboardButton(text='Video: How edX Works')],
+    #                                   [KeyboardButton(text="Activity4.pdf")],
+    #                                   [KeyboardButton(text="CLIx Image")]],
+    #                         ))
+    #
+    # elif content_type == 'text' and ("Video" in msg['text']):
+    #     bot.sendMessage(chat_id, 'https://www.youtube.com/watch?v=B-EFayAA5_0')
+    #
+    # elif content_type == 'text' and ("pdf" in msg['text']):
+    #     # Once we have a db, we could search through the db looking for
+    #     # the pdf. However, sendDocument takes an a URL, so we might
+    #     # have to look into other ways to deal with this.
+    #     bot.sendDocument(chat_id, "https://courses.edx.org/c4x/LinuxFoundationX/LFS101x/asset/Introduction_to_Linux_Course_Outline.pdf")
+    #
+    # elif content_type == 'text' and ("Image" in msg['text']):
+    #     bot.sendPhoto(chat_id, "http://clix.tiss.edu/dev/ver1.0/wp-content/uploads/2015/11/Clix-logo-600x1401.png")
+    #
+    # ### FAQ ###
+    #
+    # elif content_type == 'text' and (msg['text']=='FAQ'):
+    #     bot.sendMessage(chat_id,
+    #                     'Select a category.',
+    #                     reply_markup=ReplyKeyboardMarkup(
+    #                         keyboard=[[KeyboardButton(text="Course FAQs")],
+    #                                   [KeyboardButton(text="Discussion FAQs")]]
+    #                         ))
+    #
+    # elif content_type == 'text' and (msg['text'].split(' ')[-1] == "FAQs"): # if the last word is FAQS
+    #     cat =  msg['text'].split(' ')[0] # category of FAQs
+    #     if cat == "Course":
+    #         bot.sendMessage(chat_id,
+    #                     'What is your question?',
+    #                     reply_markup=ReplyKeyboardMarkup(
+    #                         keyboard=[[KeyboardButton(text="How many courses can I take?")],
+    #                                   [KeyboardButton(text="How long is a course?")]]
+    #                         ))
+    #     elif cat == "Discussion":
+    #         bot.sendMessage(chat_id,
+    #                     'What is your question?',
+    #                     reply_markup=ReplyKeyboardMarkup(
+    #                         keyboard=[[KeyboardButton(text="How do I participate in discussions?")],
+    #                                   [KeyboardButton(text="How are discussions graded?")]]
+    #                         ))
+    #
+    # elif content_type == 'text' and msg['text'] == '/courses':
+    #     bot.sendMessage(chat_id, 'Please select a course', reply_markup=inline_links)
+    #
+    # elif content_type == 'text':
+    #     bot.sendMessage(chat_id, msg['text'])
 
-    if content_type == 'text' and msg['text'] in links.keys(): # if user enters key word
-    	bot.sendMessage(chat_id, links[msg['text']])
 
-    elif content_type == 'text' and msg['text'] == '/courses':
-        bot.sendMessage(chat_id, 'Please select a course', reply_markup=inline_links)
 
-    elif content_type == 'text' and msg['text'] == '/kbtest':
-        bot.sendMessage(chat_id, 'testing custom keyboard',
-                            reply_markup=ReplyKeyboardMarkup(
-                                keyboard=[
-                                    [KeyboardButton(text="Yes"), KeyboardButton(text="No")]]))
-    elif content_type == 'text' and (msg['text'] == '/start'):
-        bot.sendMessage(chat_id, 'Course Materials or FAQ?',
-                        reply_markup=ReplyKeyboardMarkup(
-                            keyboard=[[KeyboardButton(text="Course Materials")],
-                                      [KeyboardButton(text="FAQ")]],
-                            one_time_keyboard=True))
-
-    ### Course Materials ###
-
-    elif content_type == 'text' and msg['text'] == 'Course Materials':
-        print(chat_id)
-        bot.sendMessage(chat_id,
-                        'I am here to help you access course materials! What course are you taking?',
-                        reply_markup=ReplyKeyboardMarkup(
-                            keyboard=[[KeyboardButton(text="ICT")],
-                                      [KeyboardButton(text="English")],
-                                      [KeyboardButton(text="Math")],
-                                      [KeyboardButton(text="Science")]],
-                            one_time_keyboard=True,))
-
-    elif content_type == 'text' and (msg['text'] == 'ICT' or msg['text'] == 'English' or msg['text'] == 'Math' or msg['text'] == 'Science'):
-        numUnits = getNumUnits(msg['text'])
-        keyboard= makeUnitKeyboard(msg['text'], numUnits)
-        bot.sendMessage(chat_id,
-                        'Select your unit.',
-                        reply_markup=keyboard)
-
-    elif content_type == 'text' and ("Unit" in msg['text']):
-        course = msg['text'].split(' ')[0] # get course name
-        numSessions = getNumSessions(course)
-        keyboard = makeSessionsKeyboard(course, numSessions)
-        bot.sendMessage(chat_id,
-                        'Select your session.',
-                        reply_markup=keyboard)
-
-    elif content_type == 'text' and ("Session 1" in msg['text']):
-        bot.sendMessage(chat_id, 'To see that content you must log in to openedx on a computer.')
-
-    # all other sessions for now have hardcoded activities
-    elif content_type == 'text' and ("Session" in msg['text']):
-        bot.sendMessage(chat_id,
-                        'Select an activity.',
-                        reply_markup=ReplyKeyboardMarkup(
-                            keyboard=[[KeyboardButton(text="Message text here!")],
-                                      [KeyboardButton(text='Video: How edX Works')],
-                                      [KeyboardButton(text="Activity4.pdf")],
-                                      [KeyboardButton(text="CLIx Image")]],
-                            ))
-
-    elif content_type == 'text' and ("Video" in msg['text']):
-        bot.sendMessage(chat_id, 'https://www.youtube.com/watch?v=B-EFayAA5_0')
-
-    elif content_type == 'text' and ("pdf" in msg['text']):
-        # Once we have a db, we could search through the db looking for
-        # the pdf. However, sendDocument takes an a URL, so we might
-        # have to look into other ways to deal with this.
-        bot.sendDocument(chat_id, "https://courses.edx.org/c4x/LinuxFoundationX/LFS101x/asset/Introduction_to_Linux_Course_Outline.pdf")
-
-    elif content_type == 'text' and ("Image" in msg['text']):
-        bot.sendPhoto(chat_id, "http://clix.tiss.edu/dev/ver1.0/wp-content/uploads/2015/11/Clix-logo-600x1401.png")
-
-    ### FAQ ###
-
-    elif content_type == 'text' and (msg['text']=='FAQ'):
-        bot.sendMessage(chat_id,
-                        'Select a category.',
-                        reply_markup=ReplyKeyboardMarkup(
-                            keyboard=[[KeyboardButton(text="Course FAQs")],
-                                      [KeyboardButton(text="Discussion FAQs")]]
-                            ))
-
-    elif content_type == 'text' and (msg['text'].split(' ')[-1] == "FAQs"): # if the last word is FAQS
-        cat =  msg['text'].split(' ')[0] # category of FAQs
-        if cat == "Course":
-            bot.sendMessage(chat_id,
-                        'What is your question?',
-                        reply_markup=ReplyKeyboardMarkup(
-                            keyboard=[[KeyboardButton(text="How many courses can I take?")],
-                                      [KeyboardButton(text="How long is a course?")]]
-                            ))
-        elif cat == "Discussion":
-            bot.sendMessage(chat_id,
-                        'What is your question?',
-                        reply_markup=ReplyKeyboardMarkup(
-                            keyboard=[[KeyboardButton(text="How do I participate in discussions?")],
-                                      [KeyboardButton(text="How are discussions graded?")]]
-                            ))
-
-    elif content_type == 'text' and msg['text'] == '/courses':
-        bot.sendMessage(chat_id, 'Please select a course', reply_markup=inline_links)
-
-    elif content_type == 'text':
-        bot.sendMessage(chat_id, msg['text'])
 
 bot = telepot.Bot(TOKEN)
 update_queue = Queue()  # channel between `app` and `bot`
