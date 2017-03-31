@@ -52,6 +52,8 @@ def on_chat_message(msg):
     print('cmd:', command)
     response = Response.objects.filter(command_id=command.id)
     print('response:', response)
+    for x in response:
+        print('resp:', x)
 
     inline_links = InlineKeyboardMarkup(inline_keyboard=[
                    [InlineKeyboardButton(text='Architecture',
