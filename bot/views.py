@@ -48,7 +48,7 @@ def on_chat_message(msg):
     content_type, chat_type, chat_id = telepot.glance(msg)
     print('Chat Message:', content_type, chat_type, chat_id)
 
-    command = get_object_or_404(Command, slug=msg['text'])
+    command = get_object_or_404(Command, command_text=msg['text'])
     print('cmd:', command)
 
     inline_links = InlineKeyboardMarkup(inline_keyboard=[
