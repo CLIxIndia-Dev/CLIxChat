@@ -1,31 +1,10 @@
-from django.shortcuts import render
-
-# Create your views here.
 from django.http import HttpResponse
-
-
-# def index(request):
-#     return HttpResponse("Hello, world. You're at the bot index.")
-#
-# from django.core.context_processors import csrf
-# from django.shortcuts import render_to_response
-#
-# def my_view(request):
-#     c = {}
-#     c.update(csrf(request))
-#     # ... view code here
-#     return render_to_response("a_template.html", c)
-
-
-
 import telepot
 from telepot.namedtuple import InlineKeyboardMarkup, InlineKeyboardButton, ReplyKeyboardMarkup, KeyboardButton
 from clixchat.settings import TOKEN
-
-try:
-    from Queue import Queue
-except ImportError:
-    from queue import Queue
+from queue import Queue
+from .models import Command, Response
+from django.shortcuts import get_object_or_404
 
 """
 $ python2.7 flask_skeleton.py <token> <listening_port> <webhook_url>
@@ -68,6 +47,9 @@ def makeSessionsKeyboard(course, numSessions):
 def on_chat_message(msg):
     content_type, chat_type, chat_id = telepot.glance(msg)
     print('Chat Message:', content_type, chat_type, chat_id)
+
+    command = get_object_or_404(Command, slug=msg['text'])
+    print('cmd:', command)
 
     inline_links = InlineKeyboardMarkup(inline_keyboard=[
                    [InlineKeyboardButton(text='Architecture',
@@ -192,10 +174,11 @@ bot.message_loop({'chat': on_chat_message #,
                   # 'chosen_inline_result': on_chosen_inline_result
                   }, source=update_queue)  # take updates from queue
 
+
+
+
+
 def index(request):
     print('request post:', request.body)
-
-
     update_queue.put(request.body)  # pass update to bot
-
     return HttpResponse("Hello, world. You're at the bot index.")
