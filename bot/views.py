@@ -50,7 +50,7 @@ def on_chat_message(msg):
 
     command = get_object_or_404(Command, command_text=msg['text'])
     print('cmd:', command)
-    response = Entry.objects.filter(command_id=command.id)
+    response = Response.objects.filter(command_id=command.id)
     print('response:', response)
 
     inline_links = InlineKeyboardMarkup(inline_keyboard=[
