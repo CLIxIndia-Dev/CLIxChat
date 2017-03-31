@@ -34,7 +34,6 @@ ALLOWED_HOSTS = ['clixchat.herokuapp.com',
 
 INSTALLED_APPS = [
     'bot',
-    'editor',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
