@@ -12,3 +12,21 @@ class Response(models.Model):
     response_text = models.CharField(max_length=200)
     def __str__(self):
         return self.response_text
+
+
+class Unit(models.Model):
+    unit_text = models.SlugField(max_length=100)
+    def __str__(self):
+        return self.unit_text
+
+class Session(models.Model):
+    unit = models.ForeignKey(Unit, on_delete=models.CASCADE)
+    session_text = models.SlugField(max_length=100)
+    def __str__(self):
+        return self.session_text
+
+class Activity(models.Model):
+    session = models.ForeignKey(Session, on_delete=models.CASCADE)
+    activity_text = models.SlugField(max_length=100)
+    def __str__(self):
+        return self.activity_text
