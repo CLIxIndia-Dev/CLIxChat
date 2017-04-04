@@ -8,7 +8,7 @@ django-treebeard==4.1.0
 gunicorn==19.7.1
 multidict==2.1.4
 packaging==16.8
-r psycopg2==2.7.1
+psycopg2==2.7.1
 pyparsing==2.2.0
 queuelib==1.4.2
 six==1.10.0
