@@ -1,5 +1,5 @@
 # from django.db import models
-import from treebeard import models
+from treebeard import models
 # Create your models here.
 
 class Command(models.Model):
