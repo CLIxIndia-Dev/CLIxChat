@@ -1,5 +1,5 @@
 from django.db import models
-
+import treebeard.models
 # Create your models here.
 
 class Command(models.Model):
@@ -14,7 +14,7 @@ class Response(models.Model):
         return self.response_text
 
 
-class Unit(models.Model):
+class Unit(models.Node):
     unit_text = models.SlugField(max_length=100)
     def __str__(self):
         return self.unit_text
