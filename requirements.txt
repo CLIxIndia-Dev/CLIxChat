@@ -4,6 +4,7 @@ async-timeout==1.2.0
 chardet==2.3.0
 dj-database-url==0.4.2
 Django==1.10.6
+django-mptt==0.8.7
 gunicorn==19.7.1
 multidict==2.1.4
 packaging==16.8
