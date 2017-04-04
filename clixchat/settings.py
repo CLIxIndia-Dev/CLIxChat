@@ -78,31 +78,31 @@ WSGI_APPLICATION = 'clixchat.wsgi.application'
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 
 DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.sqlite3',
-    #     'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    # }
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'clixchat',
-        'USER': '',
-        'PASSWORD': '',
-        'HOST': '',                   # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
-        'PORT': '',                   # Set to empty string for default.
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.postgresql',
+    #     'NAME': 'clixchat',
+    #     'USER': '',
+    #     'PASSWORD': '',
+    #     'HOST': '',                   # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
+    #     'PORT': '',                   # Set to empty string for default.
+    # }
 
 }
 
 
 # Parse database configuration from $DATABASE_URL
-import dj_database_url
-dbconfig = dj_database_url.config()
-if dbconfig:
-    DATABASES['default'] =  dbconfig
-
-# Honor the 'X-Forwarded-Proto' header for request.is_secure()
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-SECURE_SSL_REDIRECT=True
+# import dj_database_url
+# dbconfig = dj_database_url.config()
+# if dbconfig:
+#     DATABASES['default'] =  dbconfig
+#
+# # Honor the 'X-Forwarded-Proto' header for request.is_secure()
+# SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+# SECURE_SSL_REDIRECT=True
 
 
 # Password validation
