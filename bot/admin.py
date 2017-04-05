@@ -13,6 +13,4 @@ from django.contrib import admin
 from mptt.admin import MPTTModelAdmin, DraggableMPTTAdmin
 from .models import Node
 
-admin.site.register(Node,
-                    DraggableMPTTAdmin,
-                    MPTTModelAdmin)
+admin.site.register(Node, DraggableMPTTAdmin, MPTTModelAdmin)
