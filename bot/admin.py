@@ -10,7 +10,9 @@
 
 
 from django.contrib import admin
-from mptt.admin import MPTTModelAdmin
-from .models import Unit
+from mptt.admin import MPTTModelAdmin, DraggableMPTTAdmin
+from .models import Node
 
-admin.site.register(Unit, MPTTModelAdmin)
+admin.site.register(Node,
+                    DraggableMPTTAdmin,
+                    MPTTModelAdmin)
