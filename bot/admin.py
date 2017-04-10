@@ -11,6 +11,19 @@
 
 from django.contrib import admin
 from mptt.admin import MPTTModelAdmin, DraggableMPTTAdmin
-from .models import Node
+from .models import Element
 
-admin.site.register(Node, DraggableMPTTAdmin, MPTTModelAdmin)
+admin.site.register(Element, MPTTModelAdmin)
+#
+# admin.site.register(
+#     Node,
+#     DraggableMPTTAdmin,
+#     list_display=(
+#         'tree_actions',
+#         'indented_title',
+#         # ...more fields if you feel like it...
+#     ),
+#     list_display_links=(
+#         'indented_title',
+#     ),
+# )

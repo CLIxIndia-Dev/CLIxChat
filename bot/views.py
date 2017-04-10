@@ -3,7 +3,7 @@ import telepot
 from telepot.namedtuple import InlineKeyboardMarkup, InlineKeyboardButton, ReplyKeyboardMarkup, KeyboardButton
 from clixchat.settings import TOKEN
 from queue import Queue
-from .models import Command, Response
+# from .models import Command, Response
 from django.shortcuts import get_object_or_404
 
 """
@@ -48,15 +48,15 @@ def on_chat_message(msg):
     content_type, chat_type, chat_id = telepot.glance(msg)
     print('Chat Message:', content_type, chat_type, chat_id)
 
-    # command = get_object_or_404(Command, command_text=msg['text'])
-    command = Command.objects.get(command_text=msg['text'])
-
-    print('cmd:', command)
-    response = Response.objects.filter(command_id=command.id)
-    print('response:', response)
-    for x in response:
-        print('resp:', x)
-        bot.sendMessage(chat_id, x.response_text)
+    # # command = get_object_or_404(Command, command_text=msg['text'])
+    # command = Command.objects.get(command_text=msg['text'])
+    #
+    # print('cmd:', command)
+    # response = Response.objects.filter(command_id=command.id)
+    # print('response:', response)
+    # for x in response:
+    #     print('resp:', x)
+    #     bot.sendMessage(chat_id, x.response_text)
 
     #
     #
