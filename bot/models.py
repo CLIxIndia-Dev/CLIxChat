@@ -20,12 +20,12 @@ from mptt.models import MPTTModel, TreeForeignKey
 
 
 class Element(MPTTModel):
-    name = models.SlugField(max_length=200, unique=True)
+    name = models.CharField(max_length=200)
     # default button response = nav back
     message_text = models.CharField(max_length=200)
 
     # command : the name of the button above it
     parent = TreeForeignKey('self', null=True, blank=True, related_name='children', db_index=True)
     def __str__(self):
-        return self.name + ' ' + self.message_text
+        return self.name
 
