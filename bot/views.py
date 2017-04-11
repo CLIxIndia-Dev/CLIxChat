@@ -49,7 +49,8 @@ def on_chat_message(msg):
         bot.sendMessage(chat_id, 'testing custom keyboard',
                                 reply_markup=ReplyKeyboardMarkup(
                                     keyboard=[
-                                        [KeyboardButton(text="Yes"), KeyboardButton(text="No")]]))
+                                        [KeyboardButton(text="Yes"), KeyboardButton(text="No"),
+                                         KeyboardButton(text="/test=123")]]))
     else:
         bot.sendMessage(chat_id, msg['text'])
 
