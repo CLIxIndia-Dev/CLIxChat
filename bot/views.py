@@ -3,14 +3,11 @@ import telepot
 from telepot.namedtuple import InlineKeyboardMarkup, InlineKeyboardButton, ReplyKeyboardMarkup, KeyboardButton
 from clixchat.settings import TOKEN
 from queue import Queue
-# from .models import Command, Response
-from django.shortcuts import get_object_or_404
+from .models import Element
+# from django.shortcuts import get_object_or_404
 
 """
-$ python2.7 flask_skeleton.py <token> <listening_port> <webhook_url>
-Webhook path is '/abc', therefore:
-<webhook_url>: https://<base>/abc
-Webhook manual set command via curl:
+Webhook manually set command via curl:
 curl -F "url=https://<YOURDOMAIN.EXAMPLE>/<WEBHOOKLOCATION>" https://api.telegram.org/bot<YOURTOKEN>/setWebhook
 """
 
@@ -47,6 +44,18 @@ def makeSessionsKeyboard(course, numSessions):
 def on_chat_message(msg):
     content_type, chat_type, chat_id = telepot.glance(msg)
     print('Chat Message:', content_type, chat_type, chat_id)
+
+    if content_type == 'text' and (msg['text'] == '/start'):
+        bot.sendMessage(chat_id, 'testing custom keyboard',
+                                reply_markup=ReplyKeyboardMarkup(
+                                    keyboard=[
+                                        [KeyboardButton(text="Yes"), KeyboardButton(text="No")]]))
+    else:
+        bot.sendMessage(chat_id, msg['text'])
+
+
+
+
 
     # # command = get_object_or_404(Command, command_text=msg['text'])
     # command = Command.objects.get(command_text=msg['text'])
@@ -185,10 +194,6 @@ bot.message_loop({'chat': on_chat_message #,
                   # 'inline_query': on_inline_query,
                   # 'chosen_inline_result': on_chosen_inline_result
                   }, source=update_queue)  # take updates from queue
-
-
-
-
 
 def index(request):
     print('request post:', request.body)
