@@ -45,6 +45,10 @@ def on_chat_message(msg):
     content_type, chat_type, chat_id = telepot.glance(msg)
     print('Chat Message:', content_type, chat_type, chat_id)
 
+    all_elements = Element.objects.all()
+    for x in all_elements:
+        print("name: ", x)
+
     if content_type == 'text' and (msg['text'] == '/start'):
         bot.sendMessage(chat_id, 'testing custom keyboard',
                                 reply_markup=ReplyKeyboardMarkup(
@@ -55,7 +59,8 @@ def on_chat_message(msg):
         bot.sendMessage(chat_id, msg['text'])
 
 
-
+    # element = Element.objects.get(pk=3)
+    # bot.sendMessage(chat_id, element.get_children())
 
 
     # # command = get_object_or_404(Command, command_text=msg['text'])
