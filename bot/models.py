@@ -31,7 +31,7 @@ class Element(MPTTModel):
 
 class User(models.Model):
     id = models.IntegerField(primary_key=True)
-    last_node = models.ForeignKey(Element)
+    last_node = models.ForeignKey(Element, null=True)
     last_visit = models.DateTimeField(auto_now=True)
     def __str__(self):
         return self.id
