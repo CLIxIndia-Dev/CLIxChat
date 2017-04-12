@@ -63,6 +63,7 @@ def on_chat_message(msg):
                                     keyboard=[buttons]))
 
     else:
+        print('user last node: ', user.last_node)
         last_element = Element.objects.get(pk=user.last_node)
         children = last_element.get_children()
         for x in children:
