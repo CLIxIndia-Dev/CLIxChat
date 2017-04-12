@@ -46,12 +46,8 @@ def on_chat_message(msg):
     print('Chat Message: ', content_type, chat_type, chat_id)
     print('from: ', msg['from']['id'])
 
-    user = User.objects.get_or_create(id=msg['from']['id'])
-
-    print('user: ', user)
-    for x in user:
-        print("property: ", x)
-
+    user = User.objects.get_or_create(id=msg['from']['id']) #returns a tuple
+    user = user[0]
 
     buttons=[]
 
