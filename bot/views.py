@@ -66,6 +66,8 @@ def on_chat_message(msg):
         for x in children:
             buttons += KeyboardButton(text=x.name)
 
+        print(buttons)
+
         bot.sendMessage(chat_id, element.message_text,
                         reply_markup=ReplyKeyboardMarkup(
                                     keyboard=[buttons]))
