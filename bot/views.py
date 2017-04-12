@@ -56,7 +56,7 @@ def on_chat_message(msg):
         children = element.get_children()
         for x in children:
             if x.name is not None:
-                buttons.append([KeyboardButton(text=x.name)])
+                buttons.append(KeyboardButton(text=x.name))
 
         bot.sendMessage(chat_id, element.message_text,
                         reply_markup=ReplyKeyboardMarkup(
