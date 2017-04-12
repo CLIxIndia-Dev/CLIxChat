@@ -43,7 +43,8 @@ def makeSessionsKeyboard(course, numSessions):
 
 def on_chat_message(msg):
     content_type, chat_type, chat_id = telepot.glance(msg)
-    print('Chat Message:', content_type, chat_type, chat_id)
+    print('Chat Message: ', content_type, chat_type, chat_id)
+    print('from: ', msg['from']['id'])
 
     all_elements = Element.objects.all()
     for x in all_elements:
@@ -53,10 +54,15 @@ def on_chat_message(msg):
         bot.sendMessage(chat_id, 'testing custom keyboard',
                                 reply_markup=ReplyKeyboardMarkup(
                                     keyboard=[
-                                        [KeyboardButton(text="Yes"), KeyboardButton(text="No"),
+                                        [KeyboardButton(text="Math - U1 - S1 - Activity2"), KeyboardButton(text="No"),
                                          KeyboardButton(text="/test=123")]]))
     else:
         bot.sendMessage(chat_id, msg['text'])
+
+    # obj, created = AppSettings.objects.get_or_create(name='DEFAULT_LANG')
+    # obj.value = request.POST.get('DEFAULT_LANG')
+    # obj.save()
+
 
 
     # element = Element.objects.get(pk=3)
