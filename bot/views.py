@@ -3,7 +3,7 @@ import telepot
 from telepot.namedtuple import InlineKeyboardMarkup, InlineKeyboardButton, ReplyKeyboardMarkup, KeyboardButton
 from clixchat.settings import TOKEN
 from queue import Queue
-from .models import Element
+from .models import Element, User
 # from django.shortcuts import get_object_or_404
 
 """
@@ -46,9 +46,11 @@ def on_chat_message(msg):
     print('Chat Message: ', content_type, chat_type, chat_id)
     print('from: ', msg['from']['id'])
 
-    all_elements = Element.objects.all()
-    for x in all_elements:
-        print("name: ", x)
+    user = User.objects.get_or_create(id=msg['from']['id'])
+
+    all_users = User.objects.all()
+    for x in all_users:
+        print("userID: ", x)
 
     if content_type == 'text' and (msg['text'] == '/start'):
         bot.sendMessage(chat_id, 'testing custom keyboard',
