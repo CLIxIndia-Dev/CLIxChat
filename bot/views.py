@@ -48,6 +48,11 @@ def on_chat_message(msg):
 
     user = User.objects.get_or_create(id=msg['from']['id'])
 
+    print('user: ', user)
+    for x in user:
+        print("property: ", x)
+
+
     buttons=[]
 
     if content_type == 'text' and (msg['text'] == '/start'):
