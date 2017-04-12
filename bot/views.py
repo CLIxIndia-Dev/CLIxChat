@@ -67,6 +67,8 @@ def on_chat_message(msg):
         children = last_element.get_children()
         for x in children:
             if x.name == msg['text']:
+                print('msg name: ', x.name)
+                print('pk: ', x.pk)
                 element = Element.objects.get(pk=x.pk)
                 grandchildren = element.get_children()
                 for x in grandchildren:
