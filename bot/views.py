@@ -48,6 +48,8 @@ def on_chat_message(msg):
 
     user = User.objects.get_or_create(id=msg['from']['id']) #returns a tuple
     user = user[0]
+    print(user)
+    print(user[0])
 
     buttons=[]
 
