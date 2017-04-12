@@ -11,9 +11,10 @@
 
 from django.contrib import admin
 from mptt.admin import MPTTModelAdmin, DraggableMPTTAdmin
-from .models import Element
+from .models import Element, User
 
 admin.site.register(Element, MPTTModelAdmin)
+admin.site.register(User)
 #
 # admin.site.register(
 #     Node,
