@@ -48,16 +48,34 @@ def on_chat_message(msg):
 
     user = User.objects.get_or_create(id=msg['from']['id'])
 
+    # user.last_node
+    # user.save()
+
+
     all_users = User.objects.all()
     for x in all_users:
         print("userID: ", x)
 
+
+    buttons=[]
+
+
     if content_type == 'text' and (msg['text'] == '/start'):
-        bot.sendMessage(chat_id, 'testing custom keyboard',
-                                reply_markup=ReplyKeyboardMarkup(
-                                    keyboard=[
-                                        [KeyboardButton(text="Math - U1 - S1 - Activity2"), KeyboardButton(text="No"),
-                                         KeyboardButton(text="/test=123")]]))
+        element = Element.objects.get(pk=1)
+        children = element.get_children()
+        for x in children:
+            buttons += KeyboardButton(text=x.name)
+
+        bot.sendMessage(chat_id, element.message_text,
+                        reply_markup=ReplyKeyboardMarkup(
+                                    keyboard=[buttons]))
+        #
+        #
+        # bot.sendMessage(chat_id, 'testing custom keyboard',
+        #                         reply_markup=ReplyKeyboardMarkup(
+        #                             keyboard=[
+        #                                 [KeyboardButton(text="Math - U1 - S1 - Activity2"), KeyboardButton(text="No"),
+        #                                  KeyboardButton(text="/test=123")]]))
     else:
         bot.sendMessage(chat_id, msg['text'])
 
