@@ -49,7 +49,7 @@ def on_chat_message(msg):
     user = User.objects.get_or_create(id=msg['from']['id']) #returns a tuple
     user = user[0]
     print(user)
-    print(user.last_node)
+    print(user.last_node.pk)
 
     buttons=[]
 
@@ -65,8 +65,8 @@ def on_chat_message(msg):
                                     keyboard=[buttons]))
 
     else:
-        print('user last node: ', user.last_node)
-        last_element = Element.objects.get(pk=user.last_node)
+        print('user last node pk: ', user.last_node.pk)
+        last_element = Element.objects.get(pk=user.last_node.pk)
         children = last_element.get_children()
         for x in children:
             if x.name == msg['text']:
