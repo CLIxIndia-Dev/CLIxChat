@@ -65,8 +65,8 @@ def on_chat_message(msg):
         children = element.get_children()
         for x in children:
             # if (x.name is not None):
-            print(x.name)
-            buttons += KeyboardButton(text=x.name)
+            # print(x.name)
+            buttons.append(KeyboardButton(text=x.name))
 
         print(buttons)
 
