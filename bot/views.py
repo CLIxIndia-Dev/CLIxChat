@@ -82,7 +82,7 @@ def on_chat_message(msg):
                                     keyboard=[buttons]))
 
 
-    user.last_node=element.pk
+    user.last_node=element
     user.save()
 
     # obj, created = AppSettings.objects.get_or_create(name='DEFAULT_LANG')
