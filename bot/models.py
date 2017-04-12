@@ -34,4 +34,4 @@ class User(models.Model):
     last_node = models.ForeignKey(Element, null=True)
     last_visit = models.DateTimeField(auto_now=True)
     def __str__(self):
-        return self.id
+        return str(self.id)
