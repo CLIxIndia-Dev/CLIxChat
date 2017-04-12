@@ -48,40 +48,36 @@ def on_chat_message(msg):
 
     user = User.objects.get_or_create(id=msg['from']['id'])
 
-    # user.last_node
-    # user.save()
-
-
-    all_users = User.objects.all()
-    for x in all_users:
-        print("userID: ", x)
-
-
     buttons=[]
-
 
     if content_type == 'text' and (msg['text'] == '/start'):
         element = Element.objects.get(pk=1)
         children = element.get_children()
         for x in children:
-            # if (x.name is not None):
-            # print(x.name)
-            buttons.append(KeyboardButton(text=x.name))
-
-        print(buttons)
+            if x.name is not None:
+                buttons.append(KeyboardButton(text=x.name))
 
         bot.sendMessage(chat_id, element.message_text,
                         reply_markup=ReplyKeyboardMarkup(
                                     keyboard=[buttons]))
-        #
-        #
-        # bot.sendMessage(chat_id, 'testing custom keyboard',
-        #                         reply_markup=ReplyKeyboardMarkup(
-        #                             keyboard=[
-        #                                 [KeyboardButton(text="Math - U1 - S1 - Activity2"), KeyboardButton(text="No"),
-        #                                  KeyboardButton(text="/test=123")]]))
+
     else:
-        bot.sendMessage(chat_id, msg['text'])
+        last_element = Element.objects.get(pk=user.last_node)
+        children = last_element.get_children()
+        for x in children:
+            if x.name == msg['text']:
+                element = Element.objects.get(pk=x.pk)
+                grandchildren = element.get_children()
+                for x in grandchildren:
+                    if x.name is not None:
+                        buttons.append(KeyboardButton(text=x.name))
+                bot.sendMessage(chat_id, element.message_text,
+                        reply_markup=ReplyKeyboardMarkup(
+                                    keyboard=[buttons]))
+
+
+    user.last_node=element.pk
+    user.save()
 
     # obj, created = AppSettings.objects.get_or_create(name='DEFAULT_LANG')
     # obj.value = request.POST.get('DEFAULT_LANG')
