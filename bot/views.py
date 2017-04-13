@@ -28,7 +28,7 @@ def makeUnitKeyboard(course, numUnits):
     for i in range(1,numUnits+1):
         button = [KeyboardButton(text=str(course) + " Unit " + str(i))]
         buttons.append(button)
-    return ReplyKeyboardMarkup(keyboard=buttons, one_time_keyboard=True,)
+    return ReplyKeyboardMarkup(inline_keyboard=buttons, one_time_keyboard=True,)
 
 # For now, this function assumes the number of sessions is the length of the string
 def getNumSessions(course):
@@ -39,7 +39,7 @@ def makeSessionsKeyboard(course, numSessions):
     for i in range(1,numSessions+1):
         button = [KeyboardButton(text=str(course) + " Session " + str(i))]
         buttons.append(button)
-    return ReplyKeyboardMarkup(keyboard=buttons, one_time_keyboard=True,)
+    return ReplyKeyboardMarkup(inline_keyboard=buttons, one_time_keyboard=True,)
 
 def on_chat_message(msg):
     content_type, chat_type, chat_id = telepot.glance(msg)
@@ -60,7 +60,7 @@ def on_chat_message(msg):
 
         bot.sendMessage(chat_id, element.message_text,
                         reply_markup=ReplyKeyboardMarkup(
-                                    keyboard=buttons))
+                                    inline_keyboard=buttons))
 
 
 
@@ -82,7 +82,7 @@ def on_chat_message(msg):
                 bot.sendMessage(chat_id, element.message_text,
                                 parse_mode='HTML',
                         reply_markup=ReplyKeyboardMarkup(
-                                    keyboard=buttons))
+                                    inline_keyboard=buttons))
 
 
     user.last_node=element
