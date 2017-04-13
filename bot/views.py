@@ -37,7 +37,7 @@ def getNumSessions(course):
 def makeSessionsKeyboard(course, numSessions):
     buttons = []
     for i in range(1,numSessions+1):
-        button = [InlineKeyboardButton(text=str(course) + " Session " + str(i))]
+        button = [KeyboardButton(text=str(course) + " Session " + str(i))]
         buttons.append(button)
     return ReplyKeyboardMarkup(keyboard=buttons, one_time_keyboard=True,)
 
@@ -56,10 +56,10 @@ def on_chat_message(msg):
         children = element.get_children()
         for x in children:
             if x.name is not None:
-                buttons.append([InlineKeyboardButton(text=x.name)])
+                buttons.append([KeyboardButton(text=x.name)])
 
         bot.sendMessage(chat_id, element.message_text,
-                        reply_markup=InlineKeyboardMarkup(
+                        reply_markup=ReplyKeyboardMarkup(
                                     keyboard=buttons))
 
 
@@ -76,12 +76,12 @@ def on_chat_message(msg):
                 grandchildren = element.get_children()
                 for x in grandchildren:
                     if x.name is not None:
-                        buttons.append([InlineKeyboardButton(text=x.name)])
-                buttons.append([InlineKeyboardButton(text='Restart')])
+                        buttons.append([KeyboardButton(text=x.name)])
+                buttons.append([KeyboardButton(text='Restart')])
                 print('buttons: ', buttons)
                 bot.sendMessage(chat_id, element.message_text,
                                 parse_mode='HTML',
-                        reply_markup=InlineKeyboardMarkup(
+                        reply_markup=ReplyKeyboardMarkup(
                                     keyboard=buttons))
 
 
