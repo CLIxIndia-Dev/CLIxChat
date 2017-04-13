@@ -60,7 +60,7 @@ def on_chat_message(msg):
 
         bot.sendMessage(chat_id, element.message_text,
                         reply_markup=ReplyKeyboardMarkup(
-                                    keyboard=[buttons]))
+                                    keyboard=buttons))
 
 
 
