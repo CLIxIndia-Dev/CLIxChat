@@ -62,6 +62,10 @@ def on_chat_message(msg):
                         reply_markup=ReplyKeyboardMarkup(
                                     keyboard=buttons))
 
+        bot.sendMessage(chat_id, element.message_text)
+        bot.sendMessage(chat_id, element.message_text)
+        bot.sendMessage(chat_id, element.message_text)
+        bot.sendMessage(chat_id, element.message_text)
 
 
     else:
