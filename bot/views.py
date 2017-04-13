@@ -11,35 +11,6 @@ Webhook manually set command via curl:
 curl -F "url=https://<YOURDOMAIN.EXAMPLE>/<WEBHOOKLOCATION>" https://api.telegram.org/bot<YOURTOKEN>/setWebhook
 """
 
-links = {'course':'https://www.merriam-webster.com/dictionary/course',
-	       'group':'https://www.merriam-webster.com/dictionary/group',
-         'rick':'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
-         'demox':'https://www.edx.org/course/demox-edx-demox-1',
-         'joinchat':'https://t.me/joinchat/AAAAAEG40y2c6F1dyoQyDg'}
-
-# later this function should access the database and grab
-# the number of units in a given course.
-# For now, this function just assumes the number of units is 5
-def getNumUnits(course):
-    return 5
-
-def makeUnitKeyboard(course, numUnits):
-    buttons = []
-    for i in range(1,numUnits+1):
-        button = [KeyboardButton(text=str(course) + " Unit " + str(i))]
-        buttons.append(button)
-    return ReplyKeyboardMarkup(inline_keyboard=buttons, one_time_keyboard=True,)
-
-# For now, this function assumes the number of sessions is the length of the string
-def getNumSessions(course):
-    return len(course)
-
-def makeSessionsKeyboard(course, numSessions):
-    buttons = []
-    for i in range(1,numSessions+1):
-        button = [KeyboardButton(text=str(course) + " Session " + str(i))]
-        buttons.append(button)
-    return ReplyKeyboardMarkup(inline_keyboard=buttons, one_time_keyboard=True,)
 
 def on_chat_message(msg):
     content_type, chat_type, chat_id = telepot.glance(msg)
@@ -59,7 +30,7 @@ def on_chat_message(msg):
                 buttons.append([KeyboardButton(text=x.name)])
 
         bot.sendMessage(chat_id, element.message_text,
-                        reply_markup=ReplyKeyboardMarkup(
+                        reply_markup=InlineKeyboardMarkup(
                                     inline_keyboard=buttons))
 
 
@@ -81,7 +52,7 @@ def on_chat_message(msg):
                 print('buttons: ', buttons)
                 bot.sendMessage(chat_id, element.message_text,
                                 parse_mode='HTML',
-                        reply_markup=ReplyKeyboardMarkup(
+                        reply_markup=InlineKeyboardMarkup(
                                     inline_keyboard=buttons))
 
 
