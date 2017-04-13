@@ -88,10 +88,10 @@ def on_chat_message(msg):
                         parse_mode='Markdown',
                         reply_markup=ReplyKeyboardMarkup(
                                     keyboard=buttons))
-                if (".pdf" in msg):
-                    # regex adapted from http://www.regextester.com/20
-                    fileurl = re.search('((http[s]?):\/)?\/?([^:\/\s]+)((\/\w+)*\/)([\w\-\.]+[^#?\s]+)(.pdf)', msg)
-                    bot.sendDocument(chat_id, fileurl)
+                # if (".pdf" in msg):
+                #     # regex adapted from http://www.regextester.com/20
+                #     fileurl = re.search('((http[s]?):\/)?\/?([^:\/\s]+)((\/\w+)*\/)([\w\-\.]+[^#?\s]+)(.pdf)', msg)
+                #     bot.sendDocument(chat_id, fileurl)
 
 
 
