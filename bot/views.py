@@ -51,7 +51,7 @@ def on_chat_message(msg):
 
     buttons=[]
 
-    if content_type == 'text' and (msg['text'] == '/start'):
+    if content_type == 'text' and ( (msg['text'] == '/start') or (msg['text'] == 'Restart') ):
         element = Element.objects.get(pk=1)
         children = element.get_children()
         for x in children:
@@ -77,6 +77,7 @@ def on_chat_message(msg):
                 for x in grandchildren:
                     if x.name is not None:
                         buttons.append([KeyboardButton(text=x.name)])
+                buttons.append([KeyboardButton(text='Restart')])
                 print('buttons: ', buttons)
                 bot.sendMessage(chat_id, element.message_text,
                                 parse_mode='HTML',
