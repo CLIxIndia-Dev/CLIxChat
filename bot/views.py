@@ -77,6 +77,7 @@ def on_chat_message(msg):
                 for x in grandchildren:
                     if x.name is not None:
                         buttons.append([KeyboardButton(text=x.name)])
+                print('buttons: ', buttons)
                 bot.sendMessage(chat_id, element.message_text,
                                 parse_mode='HTML',
                         reply_markup=ReplyKeyboardMarkup(
