@@ -59,7 +59,7 @@ def on_chat_message(msg):
                 buttons.append([InlineKeyboardButton(text=x.name)])
 
         bot.sendMessage(chat_id, element.message_text,
-                        reply_markup=ReplyKeyboardMarkup(
+                        reply_markup=InlineKeyboardMarkup(
                                     keyboard=buttons))
 
 
@@ -81,7 +81,7 @@ def on_chat_message(msg):
                 print('buttons: ', buttons)
                 bot.sendMessage(chat_id, element.message_text,
                                 parse_mode='HTML',
-                        reply_markup=ReplyKeyboardMarkup(
+                        reply_markup=InlineKeyboardMarkup(
                                     keyboard=buttons))
 
 
