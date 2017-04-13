@@ -81,7 +81,7 @@ def on_chat_message(msg):
                 print('buttons: ', buttons)
                 msg = element.message_text
                 bot.sendMessage(chat_id, msg,
-                                parse_mode='Markdown',
+                                
                         reply_markup=ReplyKeyboardMarkup(
                                     keyboard=buttons))
                 if (".pdf" in msg):
