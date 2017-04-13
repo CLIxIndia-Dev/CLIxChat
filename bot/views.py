@@ -5,6 +5,8 @@ from clixchat.settings import TOKEN
 from queue import Queue
 from .models import Element, User
 # from django.shortcuts import get_object_or_404
+import urllib
+
 
 """
 Webhook manually set command via curl:
@@ -79,7 +81,8 @@ def on_chat_message(msg):
                         buttons.append([KeyboardButton(text=x.name)])
                 buttons.append([KeyboardButton(text='Restart')])
                 print('buttons: ', buttons)
-                bot.sendMessage(chat_id, element.message_text,
+                msg = urllib.urlencode(element.message_text)
+                bot.sendMessage(chat_id, msg,
                                 parse_mode='HTML',
                         reply_markup=ReplyKeyboardMarkup(
                                     keyboard=buttons))
