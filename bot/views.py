@@ -81,7 +81,7 @@ def on_chat_message(msg):
                         buttons.append([KeyboardButton(text=x.name)])
                 buttons.append([KeyboardButton(text='Restart')])
                 print('buttons: ', buttons)
-                msg = urllib.urlencode(element.message_text)
+                msg = urllib.parse.urlencode(element.message_text)
                 bot.sendMessage(chat_id, msg,
                                 parse_mode='HTML',
                         reply_markup=ReplyKeyboardMarkup(
