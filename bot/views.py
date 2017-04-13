@@ -4,6 +4,7 @@ from telepot.namedtuple import InlineKeyboardMarkup, InlineKeyboardButton, Reply
 from clixchat.settings import TOKEN
 from queue import Queue
 from .models import Element, User
+import re
 # from django.shortcuts import get_object_or_404
 
 """
@@ -44,9 +45,8 @@ def makeSessionsKeyboard(course, numSessions):
 def on_chat_message(msg):
     content_type, chat_type, chat_id = telepot.glance(msg)
     print('Chat Message: ', content_type, chat_type, chat_id)
-    print('from: ', msg['from']['id'])
 
-    user = User.objects.get_or_create(id=msg['from']['id']) #returns a tuple
+    user = User.objects.get_or_create(id=chat_id) #returns a tuple
     user = user[0]
 
     buttons=[]
@@ -79,23 +79,21 @@ def on_chat_message(msg):
                         buttons.append([KeyboardButton(text=x.name)])
                 buttons.append([KeyboardButton(text='Restart')])
                 print('buttons: ', buttons)
-                bot.sendMessage(chat_id, element.message_text,
+                msg = element.message_text
+                bot.sendMessage(chat_id, msg,
                                 parse_mode='HTML',
                         reply_markup=ReplyKeyboardMarkup(
                                     keyboard=buttons))
+                if (".pdf" in msg):
+                    # regex adapted from http://www.regextester.com/20
+                    fileurl = re.search('((http[s]?):\/)?\/?([^:\/\s]+)((\/\w+)*\/)([\w\-\.]+[^#?\s]+)(.pdf)', msg)
+                    bot.sendDocument(chat_id, fileurl)
+
+
 
 
     user.last_node=element
     user.save()
-
-    # obj, created = AppSettings.objects.get_or_create(name='DEFAULT_LANG')
-    # obj.value = request.POST.get('DEFAULT_LANG')
-    # obj.save()
-
-
-
-    # element = Element.objects.get(pk=3)
-    # bot.sendMessage(chat_id, element.get_children())
 
 
     # # command = get_object_or_404(Command, command_text=msg['text'])
