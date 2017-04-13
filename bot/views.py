@@ -62,6 +62,8 @@ def on_chat_message(msg):
                         reply_markup=ReplyKeyboardMarkup(
                                     keyboard=[buttons]))
 
+
+
     else:
         print('user last node pk: ', user.last_node.pk)
         last_element = Element.objects.get(pk=user.last_node.pk)
@@ -76,6 +78,7 @@ def on_chat_message(msg):
                     if x.name is not None:
                         buttons.append(KeyboardButton(text=x.name))
                 bot.sendMessage(chat_id, element.message_text,
+                                parse_mode='HTML',
                         reply_markup=ReplyKeyboardMarkup(
                                     keyboard=[buttons]))
 
