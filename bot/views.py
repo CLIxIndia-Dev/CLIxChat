@@ -69,13 +69,13 @@ def on_chat_message(msg):
 
     else:
         print('user last node pk: ', user.last_node.pk)
-        last_element = Element.objects.get(pk=user.last_node.pk)
+        last_element = Element.objects.get_object_or_404(pk=user.last_node.pk)
         children = last_element.get_children()
         for x in children:
             if x.name == msg['text']:
                 print('msg name: ', x.name)
                 print('pk: ', x.pk)
-                element = Element.objects.get(pk=x.pk)
+                element = Element.objects.get_object_or_404(pk=x.pk)
                 msg = element.message_text
 
                 grandchildren = element.get_children()
