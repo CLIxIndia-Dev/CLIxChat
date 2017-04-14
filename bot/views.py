@@ -4,7 +4,7 @@ from telepot.namedtuple import InlineKeyboardMarkup, InlineKeyboardButton, Reply
 from clixchat.settings import TOKEN
 from queue import Queue
 from .models import Element, User
-# from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404
 
 """
 Webhook manually set command via curl:
