@@ -75,6 +75,8 @@ def on_chat_message(msg):
         print('user last node pk: ', user.last_node.pk)
         last_element = Element.objects.get(pk=user.last_node.pk)
         children = last_element.get_children()
+        print("children: ", children)
+        print("last element: ", last_element)
         for x in children:
             if x.name == msg['text']:
                 print('msg name: ', x.name)
