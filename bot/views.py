@@ -47,7 +47,7 @@ def on_chat_message(msg):
     print('Chat Message: ', content_type, chat_type, chat_id)
     print('from: ', msg['from']['id'])
 
-    user = User.objects.get_or_create(id=msg['from']['id']) #returns a tuple
+    user = User.objects.get_or_create(id=chat_id) #returns a tuple
     user = user[0]
     current_time = datetime.datetime.now() # now() does not include timezone
     last = user.last_visit.replace(tzinfo=None) # set tzinfo to none so we can get difference
@@ -55,7 +55,7 @@ def on_chat_message(msg):
     buttons=[]
 
     if content_type == 'text' and ( (msg['text'] == '/start') or (msg['text'] == 'Restart') or (hours >= 6) ):
-        element = Element.objects.get(pk=1)
+        element = Element.objects.get(pk=1) # not a great idea to search via pk, should prob use filter instead
         children = element.get_children()
         for x in children:
             if x.name is not None:
