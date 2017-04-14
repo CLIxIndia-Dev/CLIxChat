@@ -52,7 +52,7 @@ def on_chat_message(msg):
     buttons=[]
 
 
-    
+
 
     if content_type == 'text' and ( (msg['text'] == '/start') or (msg['text'] == 'Restart') ):
         element = Element.objects.get(pk=1) # not a great idea to search via pk, should prob use filter instead
@@ -76,13 +76,23 @@ def on_chat_message(msg):
                 print('msg name: ', x.name)
                 print('pk: ', x.pk)
                 element = Element.objects.get(pk=x.pk)
+                msg = element.message_text
+
                 grandchildren = element.get_children()
                 for x in grandchildren:
                     if x.name is not None:
                         buttons.append([KeyboardButton(text=x.name)])
+
+                if len(buttons) == 0:
+                    element = last_element
+                    for x in children:
+                        if x.name is not None:
+                            buttons.append([KeyboardButton(text=x.name)])
+
+
                 buttons.append([KeyboardButton(text='Restart')])
                 print('buttons: ', buttons)
-                bot.sendMessage(chat_id, element.message_text,
+                bot.sendMessage(chat_id, msg,
                                 parse_mode='HTML',
                         reply_markup=ReplyKeyboardMarkup(
                                     keyboard=buttons))
