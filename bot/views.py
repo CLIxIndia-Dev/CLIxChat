@@ -5,7 +5,7 @@ from clixchat.settings import TOKEN
 from queue import Queue
 from .models import Element, User
 from datetime import datetime
-import pytz
+#import pytz
 from django.shortcuts import get_object_or_404
 
 
@@ -80,7 +80,7 @@ def on_chat_message(msg):
                 print('msg name: ', x.name)
                 print('pk: ', x.pk)
                 element = Element.objects.get_object_or_404(pk=x.pk)
-                chat_message = element.message_text
+                msg = element.message_text
 
                 grandchildren = element.get_children()
                 for x in grandchildren:
@@ -96,21 +96,10 @@ def on_chat_message(msg):
 
                 buttons.append([KeyboardButton(text='Restart')])
                 print('buttons: ', buttons)
-
-                if ("~" in msg['text']):
-                    chat_messages = chat_message.split('~')
-                    for x in chat_messages:
-                        bot.sendMessage(chat_id, x,
-                                parse_mode='Markdown')
-
-                    bot.sendMessage(chat_id, "",
+                bot.sendMessage(chat_id, msg,
+                                parse_mode='HTML',
                         reply_markup=ReplyKeyboardMarkup(
                                     keyboard=buttons))
-                else:
-                    bot.sendMessage(chat_id, chat_message,
-                                    parse_mode='Markdown',
-                            reply_markup=ReplyKeyboardMarkup(
-                                        keyboard=buttons))
 
 
     user.last_node=element
