@@ -4,7 +4,8 @@ from telepot.namedtuple import InlineKeyboardMarkup, InlineKeyboardButton, Reply
 from clixchat.settings import TOKEN
 from queue import Queue
 from .models import Element, User
-import datetime
+from datetime import datetime
+import pytz
 from django.shortcuts import get_object_or_404
 
 
@@ -52,10 +53,11 @@ def on_chat_message(msg):
     user = user[0]
     current_time = datetime.datetime.now() # now() does not include timezone
     last = user.last_visit.replace(tzinfo=None) # set tzinfo to none so we can get difference
-    hours = (current_time - last)/3600 
+    hours = (current_time - last).seconds/3600
+    seconds = (current_time - last).seconds
     buttons=[]
 
-    if content_type == 'text' and ( (msg['text'] == '/start') or (msg['text'] == 'Restart') or (hours >= 6) ):
+    if content_type == 'text' and ( (msg['text'] == '/start') or (msg['text'] == 'Restart') or (seconds > 10) ):
 
         element = Element.objects.get(pk=1) # not a great idea to search via pk, should prob use filter instead
         children = element.get_children()
