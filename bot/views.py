@@ -57,8 +57,8 @@ def on_chat_message(msg):
     seconds = (current_time - last).seconds
     buttons=[]
 
-    if content_type == 'text' and ( (msg['text'] == '/start') or (msg['text'] == 'Restart') or (seconds > 10) ):
-
+    # if content_type == 'text' and ( (msg['text'] == '/start') or (msg['text'] == 'Restart') or (seconds > 10) ):
+    if content_type == 'text' and ( (msg['text'] == '/start') or (msg['text'] == 'Restart')):
         element = Element.objects.get(pk=1) # not a great idea to search via pk, should prob use filter instead
         children = element.get_children()
         for x in children:
