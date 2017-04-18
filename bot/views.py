@@ -108,7 +108,7 @@ def on_chat_message(msg):
                 buttons.append([KeyboardButton(text='Restart')])
                 print('buttons: ', buttons)
                 bot.sendMessage(chat_id, msg,
-                                # parse_mode='Markdown',
+                                parse_mode='Markdown',
                         reply_markup=ReplyKeyboardMarkup(
                                     keyboard=buttons))
 
