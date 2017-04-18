@@ -82,6 +82,7 @@ def on_chat_message(msg):
                 print('msg name: ', x.name)
                 print('pk: ', x.pk)
                 element = Element.objects.get(pk=x.pk)
+                print('element: ', element)
                 msg = element.message_text
 
                 grandchildren = element.get_children()
@@ -103,7 +104,7 @@ def on_chat_message(msg):
                         reply_markup=ReplyKeyboardMarkup(
                                     keyboard=buttons))
 
-
+    rint('element: ', element)
     user.last_node=element
     user.save()
 
