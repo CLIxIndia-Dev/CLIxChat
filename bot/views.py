@@ -82,11 +82,11 @@ def on_chat_message(msg):
         children = last_element.get_children()
         # print("children: ", children)
         # print("last element: ", last_element)
+        found = False
         for x in children:
             # print('msg text: ', chat_text)
             # # print('pk: ', x.pk)
             print('obj name: ', x.name)
-            found = False
             if x.name == chat_text:
                 found = True
                 # print('msg name: ', x.name)
@@ -116,11 +116,11 @@ def on_chat_message(msg):
                                     parse_mode='Markdown',
                             reply_markup=ReplyKeyboardMarkup(
                                         keyboard=buttons))
-            if not found:
-                print("couldn't find chat text: ", chat_text)
-                bot.sendMessage(chat_id, "I'm sorry, I don't understand.",
-                        reply_markup=ReplyKeyboardMarkup(
-                                    keyboard=[[KeyboardButton(text='Restart')]]))
+        if not found:
+            print("couldn't find chat text: ", chat_text)
+            bot.sendMessage(chat_id, "I'm sorry, I don't understand.",
+                    reply_markup=ReplyKeyboardMarkup(
+                                keyboard=[[KeyboardButton(text='Restart')]]))
 
 
     # print('element: ', element)
