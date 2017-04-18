@@ -46,8 +46,8 @@ def makeSessionsKeyboard(course, numSessions):
 
 def on_chat_message(msg):
     content_type, chat_type, chat_id = telepot.glance(msg)
-    print('Chat Message: ', content_type, chat_type, chat_id)
-    print('from: ', msg['from']['id'])
+    # print('Chat Message: ', content_type, chat_type, chat_id)
+    # print('from: ', msg['from']['id'])
 
     user = User.objects.get_or_create(id=chat_id) #returns a tuple
     user = user[0]
@@ -77,20 +77,22 @@ def on_chat_message(msg):
 
 
     else:
-        print('user last node pk: ', user.last_node.pk)
+        # print('user last node pk: ', user.last_node.pk)
         last_element = Element.objects.get(pk=user.last_node.pk)
         children = last_element.get_children()
-        print("children: ", children)
-        print("last element: ", last_element)
+        # print("children: ", children)
+        # print("last element: ", last_element)
         for x in children:
-            print('msg text: ', chat_text)
-            # print('pk: ', x.pk)
-            print('obj: ', x)
+            # print('msg text: ', chat_text)
+            # # print('pk: ', x.pk)
+            # print('obj: ', x)
+            found = False
             if x.name == chat_text:
-                print('msg name: ', x.name)
-                print('pk: ', x.pk)
+                found = True
+                # print('msg name: ', x.name)
+                # print('pk: ', x.pk)
                 element = Element.objects.get(pk=x.pk)
-                print('element: ', element)
+                # print('element: ', element)
                 msg = element.message_text
 
                 grandchildren = element.get_children()
@@ -106,7 +108,7 @@ def on_chat_message(msg):
 
 
                 buttons.append([KeyboardButton(text='Restart')])
-                print('buttons: ', buttons)
+                # print('buttons: ', buttons)
 
                 msg = msg.split("~")
                 for x in msg:
@@ -114,6 +116,12 @@ def on_chat_message(msg):
                                     parse_mode='Markdown',
                             reply_markup=ReplyKeyboardMarkup(
                                         keyboard=buttons))
+            if not found:
+                print("couldn't find chat text: ", chat_text)
+                bot.sendMessage(chat_id, "I'm sorry, I don't understand.",
+                        reply_markup=ReplyKeyboardMarkup(
+                                    keyboard=[[KeyboardButton(text='Restart')]]))
+
 
     print('element: ', element)
     user.last_node=element
