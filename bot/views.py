@@ -59,8 +59,8 @@ def on_chat_message(msg):
 
     text = msg['text']
 
-    if content_type == 'text' and ( (msg['text'] == '/start') or (msg['text'] == 'Restart') or (seconds > 60) ):
-    # if content_type == 'text' and ( (msg['text'] == '/start') or (msg['text'] == 'Restart')):
+    # if content_type == 'text' and ( (msg['text'] == '/start') or (msg['text'] == 'Restart') or (seconds > 60) ):
+    if content_type == 'text' and ( (msg['text'] == '/start') or (msg['text'] == 'Restart')):
         if (seconds > 60):
             bot.sendMessage(chat_id, "Welcome back!")
 
