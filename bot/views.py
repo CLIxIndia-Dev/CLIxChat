@@ -85,7 +85,7 @@ def on_chat_message(msg):
         for x in children:
             # print('msg text: ', chat_text)
             # # print('pk: ', x.pk)
-            # print('obj: ', x)
+            print('obj name: ', x.name)
             found = False
             if x.name == chat_text:
                 found = True
@@ -123,7 +123,7 @@ def on_chat_message(msg):
                                     keyboard=[[KeyboardButton(text='Restart')]]))
 
 
-    print('element: ', element)
+    # print('element: ', element)
     user.last_node=element
     user.save()
 
