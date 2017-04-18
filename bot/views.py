@@ -57,7 +57,7 @@ def on_chat_message(msg):
     seconds = (current_time - last).seconds
     buttons=[]
 
-    text = msg['text']
+    chat_text = msg['text']
 
     # if content_type == 'text' and ( (msg['text'] == '/start') or (msg['text'] == 'Restart') or (seconds > 60) ):
     if content_type == 'text' and ( (msg['text'] == '/start') or (msg['text'] == 'Restart')):
@@ -83,10 +83,10 @@ def on_chat_message(msg):
         print("children: ", children)
         print("last element: ", last_element)
         for x in children:
-            print('msg text: ', text)
+            print('msg text: ', chat_text)
             # print('pk: ', x.pk)
             print('obj: ', x)
-            if x.name == text:
+            if x.name == chat_text:
                 print('msg name: ', x.name)
                 print('pk: ', x.pk)
                 element = Element.objects.get(pk=x.pk)
@@ -107,10 +107,13 @@ def on_chat_message(msg):
 
                 buttons.append([KeyboardButton(text='Restart')])
                 print('buttons: ', buttons)
-                bot.sendMessage(chat_id, msg,
-                                parse_mode='Markdown',
-                        reply_markup=ReplyKeyboardMarkup(
-                                    keyboard=buttons))
+
+                msg = msg.split("~")
+                for x in msg:
+                    bot.sendMessage(chat_id, x,
+                                    parse_mode='Markdown',
+                            reply_markup=ReplyKeyboardMarkup(
+                                        keyboard=buttons))
 
     print('element: ', element)
     user.last_node=element
