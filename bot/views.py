@@ -104,7 +104,7 @@ def on_chat_message(msg):
                         reply_markup=ReplyKeyboardMarkup(
                                     keyboard=buttons))
 
-    rint('element: ', element)
+    print('element: ', element)
     user.last_node=element
     user.save()
 
