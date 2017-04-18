@@ -78,8 +78,8 @@ def on_chat_message(msg):
         print("children: ", children)
         print("last element: ", last_element)
         for x in children:
-            print('msg name: ', x.name)
-            print('pk: ', x.pk)
+            print('msg text: ', msg['text'])
+            # print('pk: ', x.pk)
             print('obj: ', x)
             if x.name == msg['text']:
                 print('msg name: ', x.name)
