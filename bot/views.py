@@ -57,6 +57,8 @@ def on_chat_message(msg):
     seconds = (current_time - last).seconds
     buttons=[]
 
+    text = msg['text']
+
     # if content_type == 'text' and ( (msg['text'] == '/start') or (msg['text'] == 'Restart') or (seconds > 10) ):
     if content_type == 'text' and ( (msg['text'] == '/start') or (msg['text'] == 'Restart')):
         element = Element.objects.get(pk=1) # not a great idea to search via pk, should prob use filter instead
@@ -78,10 +80,10 @@ def on_chat_message(msg):
         print("children: ", children)
         print("last element: ", last_element)
         for x in children:
-            print('msg text: ', msg['text'])
+            print('msg text: ', text)
             # print('pk: ', x.pk)
             print('obj: ', x)
-            if x.name == msg['text']:
+            if x.name == text:
                 print('msg name: ', x.name)
                 print('pk: ', x.pk)
                 element = Element.objects.get(pk=x.pk)
