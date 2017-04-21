@@ -113,10 +113,17 @@ def on_chat_message(msg):
                 msg = msg.split("~")
                 for x in msg:
                     print('********x: ', x)
-                    bot.sendMessage(chat_id, x,
+                    if (x == "http://www.nycvisitorscenter.com/NYCGUIDE.pdf"):
+                        print "sending document"
+                        bot.sendDocument(chat_id, document="http://www.nycvisitorscenter.com/NYCGUIDE.pdf", caption="open this doc", parse_mode='Markdown',
+                            reply_markup=ReplyKeyboardMarkup(
+                                        keyboard=buttons))
+                    else:
+                        bot.sendMessage(chat_id, x,
                                     parse_mode='Markdown',
                             reply_markup=ReplyKeyboardMarkup(
                                         keyboard=buttons))
+                    
         if not found:
             print("couldn't find chat text: ", chat_text)
             bot.sendMessage(chat_id, "I'm sorry, I don't understand.",
