@@ -98,6 +98,7 @@ def on_chat_message(msg):
                 grandchildren = element.get_children()
                 for x in grandchildren:
                     if x.name is not None:
+                        print('button name: ', x.name)
                         buttons.append([KeyboardButton(text=x.name)])
 
                 if len(buttons) == 0:
