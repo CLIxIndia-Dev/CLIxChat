@@ -115,7 +115,7 @@ def on_chat_message(msg):
                     print('********x: ', x)
                     if (x == "http://www.nycvisitorscenter.com/NYCGUIDE.pdf"):
                         print ('sending document')
-                        bot.sendDocument(chat_id, document="http://www.nycvisitorscenter.com/NYCGUIDE.pdf", caption="open this doc", parse_mode='Markdown',
+                        bot.sendDocument(chat_id, document="http://www.nycvisitorscenter.com/NYCGUIDE.pdf", caption="open this doc",
                             reply_markup=ReplyKeyboardMarkup(
                                         keyboard=buttons))
                     else:
