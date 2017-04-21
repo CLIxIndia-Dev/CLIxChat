@@ -112,6 +112,8 @@ def on_chat_message(msg):
 
                 msg = msg.split("~")
                 for x in msg:
+                    print '******** x'
+                    print x
                     bot.sendMessage(chat_id, x,
                                     parse_mode='Markdown',
                             reply_markup=ReplyKeyboardMarkup(
