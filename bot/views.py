@@ -119,7 +119,7 @@ def on_chat_message(msg):
                         fileurl = re.search('((http[s]?):\/)?\/?([^:\/\s]+)((\/\w+)*\/)([\w\-\.]+[^#?\s]+)(.pdf)', x)
                         print (fileurl)
                         print (x)
-                        bot.sendDocument(chat_id, fileurl,
+                        bot.sendDocument(chat_id, document = fileurl,
                                          reply_markup=ReplyKeyboardMarkup(
                                              keyboard=buttons))
                     #if (x == "http://www.nycvisitorscenter.com/NYCGUIDE.pdf"):
