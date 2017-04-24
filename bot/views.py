@@ -117,8 +117,8 @@ def on_chat_message(msg):
                         print ('sending pdf')
                         # regex adapted from http://www.regextester.com/20
                         fileurl = re.search('((http[s]?):\/)?\/?([^:\/\s]+)((\/\w+)*\/)([\w\-\.]+[^#?\s]+)(.pdf)', x)
-                        print fileurl
-                        print x
+                        print (fileurl)
+                        print (x)
                         bot.sendDocument(chat_id, fileurl,
                                          reply_markup=ReplyKeyboardMarkup(
                                              keyboard=buttons))
