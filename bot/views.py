@@ -127,7 +127,7 @@ def on_chat_message(msg):
                         result = re.search('((http[s]?):\/)?\/?([^:\/\s]+)((\/\w+)*\/)([\w\-\.]+[^#?\s]+)(.mp3)', x)
                         audiourl = result.group(0) # just the url
                         print ('x: ', x)
-                        caption_txt = x.replace(fileurl, "")
+                        caption_txt = x.replace(audiourl, "")
                         print ('caption: ', caption_txt)
                         bot.sendAudio(chat_id, audio = audiourl,
                                       caption = caption_txt,
