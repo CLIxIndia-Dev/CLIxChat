@@ -5,6 +5,7 @@ from clixchat.settings import TOKEN
 from queue import Queue
 from .models import Element, User
 import datetime
+import re
 #import pytz
 # from django.shortcuts import get_object_or_404
 
@@ -112,12 +113,19 @@ def on_chat_message(msg):
 
                 msg = msg.split("~")
                 for x in msg:
-                    print('********x: ', x)
-                    if (x == "http://www.nycvisitorscenter.com/NYCGUIDE.pdf"):
-                        print ('sending document')
-                        bot.sendDocument(chat_id, document="http://www.nycvisitorscenter.com/NYCGUIDE.pdf", caption="open this doc",
-                            reply_markup=ReplyKeyboardMarkup(
-                                        keyboard=buttons))
+                    if (".pdf" in x):
+                        print ('sending pdf')
+                        # regex adapted from http://www.regextester.com/20
+                        fileurl = re.search('((http[s]?):\/)?\/?([^:\/\s]+)((\/\w+)*\/)([\w\-\.]+[^#?\s]+)(.pdf)', x)
+                        print fileurl
+                        print x
+                        bot.sendDocument(chat_id, fileurl,
+                                         reply_markup=ReplyKeyboardMarkup(
+                                             keyboard=buttons))
+                    #if (x == "http://www.nycvisitorscenter.com/NYCGUIDE.pdf"):
+                     #   bot.sendDocument(chat_id, document="http://www.nycvisitorscenter.com/NYCGUIDE.pdf", caption="open this doc",
+                           # reply_markup=ReplyKeyboardMarkup(
+                                     #   keyboard=buttons))
                     else:
                         bot.sendMessage(chat_id, x,
                                     parse_mode='Markdown',
