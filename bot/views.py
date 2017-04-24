@@ -120,7 +120,7 @@ def on_chat_message(msg):
                         print ('fileurl: ', fileurl)
                         print ('this should just be url? ', fileurl.group(0))
                         print ('x: ', x)
-                        bot.sendDocument(chat_id, document = fileurl,
+                        bot.sendDocument(chat_id, document = fileurl.group(0),
                                          reply_markup=ReplyKeyboardMarkup(
                                              keyboard=buttons))
                     #if (x == "http://www.nycvisitorscenter.com/NYCGUIDE.pdf"):
