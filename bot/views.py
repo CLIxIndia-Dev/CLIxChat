@@ -114,13 +114,13 @@ def on_chat_message(msg):
                 msg = msg.split("~")
                 for x in msg:
                     if (".pdf" in x):
-                        print ('sending pdf')
                         # regex adapted from http://www.regextester.com/20
-                        fileurl = re.search('((http[s]?):\/)?\/?([^:\/\s]+)((\/\w+)*\/)([\w\-\.]+[^#?\s]+)(.pdf)', x)
-                        print ('fileurl: ', fileurl)
-                        print ('this should just be url? ', fileurl.group(0))
+                        result = re.search('((http[s]?):\/)?\/?([^:\/\s]+)((\/\w+)*\/)([\w\-\.]+[^#?\s]+)(.pdf)', x)
+                        fileurl = result.group(0) # just the url
                         print ('x: ', x)
-                        bot.sendDocument(chat_id, document = fileurl.group(0),
+                        caption_txt = x.replace(fileurl, "")
+                        bot.sendDocument(chat_id, document = fileurl,
+                                         caption = caption_txt,
                                          reply_markup=ReplyKeyboardMarkup(
                                              keyboard=buttons))
                     #if (x == "http://www.nycvisitorscenter.com/NYCGUIDE.pdf"):
