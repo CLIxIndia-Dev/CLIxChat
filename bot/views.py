@@ -123,10 +123,16 @@ def on_chat_message(msg):
                                          caption = caption_txt,
                                          reply_markup=ReplyKeyboardMarkup(
                                              keyboard=buttons))
-                    #if (x == "http://www.nycvisitorscenter.com/NYCGUIDE.pdf"):
-                     #   bot.sendDocument(chat_id, document="http://www.nycvisitorscenter.com/NYCGUIDE.pdf", caption="open this doc",
-                           # reply_markup=ReplyKeyboardMarkup(
-                                     #   keyboard=buttons))
+                    elif (".mp3" in x):
+                        result = re.search('((http[s]?):\/)?\/?([^:\/\s]+)((\/\w+)*\/)([\w\-\.]+[^#?\s]+)(.mp3)', x)
+                        audiourl = result.group(0) # just the url
+                        print ('x: ', x)
+                        caption_txt = x.replace(fileurl, "")
+                        print ('caption: ', caption_txt)
+                        bot.sendAudio(chat_id, audio = audiourl,
+                                      caption = caption_txt,
+                                      reply_markup=ReplyKeyboardMarkup(
+                                             keyboard=buttons))
                     else:
                         bot.sendMessage(chat_id, x,
                                     parse_mode='Markdown',
