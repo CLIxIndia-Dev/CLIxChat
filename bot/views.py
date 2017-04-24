@@ -117,7 +117,6 @@ def on_chat_message(msg):
                         # regex adapted from http://www.regextester.com/20
                         result = re.search('((http[s]?):\/)?\/?([^:\/\s]+)((\/\w+)*\/)([\w\-\.]+[^#?\s]+)(.pdf)', x)
                         fileurl = result.group(0) # just the url
-                        print ('x: ', x)
                         caption_txt = x.replace(fileurl, "")
                         bot.sendDocument(chat_id, document = fileurl,
                                          caption = caption_txt,
@@ -126,9 +125,7 @@ def on_chat_message(msg):
                     elif (".mp3" in x):
                         result = re.search('((http[s]?):\/)?\/?([^:\/\s]+)((\/\w+)*\/)([\w\-\.]+[^#?\s]+)(.mp3)', x)
                         audiourl = result.group(0) # just the url
-                        print ('x: ', x)
                         caption_txt = x.replace(audiourl, "")
-                        print ('caption: ', caption_txt)
                         bot.sendAudio(chat_id, audio = audiourl,
                                       caption = caption_txt,
                                       reply_markup=ReplyKeyboardMarkup(
