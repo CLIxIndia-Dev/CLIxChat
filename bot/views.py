@@ -65,7 +65,9 @@ def on_chat_message(msg):
         if (seconds > 60):
             bot.sendMessage(chat_id, "Welcome back!")
 
-        element = Element.objects.get(pk=1) # not a great idea to search via pk, should prob use filter instead
+        #element = Element.objects.get(pk=1) # not a great idea to search via pk, should prob use filter instead
+        element = Element.objects.filter(level=0)
+        print("element: ", element)
         children = element.get_children()
         for x in children:
             if x.name is not None:
