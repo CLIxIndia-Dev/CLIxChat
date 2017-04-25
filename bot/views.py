@@ -70,7 +70,7 @@ def on_chat_message(msg):
         print("element: ", element)
         print("element2: ", element2)
         children = element.get_children()
-        children2 = element2.get_children()
+        children2 = element2.get_descendants()
         print("children: ", children)
         print("children2: ",children2)
         for x in children:
