@@ -131,7 +131,9 @@ def on_chat_message(msg):
                                       reply_markup=ReplyKeyboardMarkup(
                                              keyboard=buttons))
                     else:
-                        newx = x[0:(len(x)/2)] + '\n' + x[len(x)/2:len(x)]
+                        #newx = x[0:(len(x)/2)] + '\n' + x[len(x)/2:len(x)]
+                        newx= x + '\n' + x
+                        print("new line!!")
                         bot.sendMessage(chat_id, newx,
                                     parse_mode='Markdown',
                             reply_markup=ReplyKeyboardMarkup(
