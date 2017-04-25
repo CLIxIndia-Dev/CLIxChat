@@ -105,8 +105,9 @@ def on_chat_message(msg):
                     element = last_element
                     for x in children:
                         if x.name is not None:
-                            buttonName = x.name + '\n' + x.name
-                            buttons.append([KeyboardButton(text=buttonName)])
+                            #new line character doesn't work
+                            #buttonName = x.name + '\n' + x.name
+                            buttons.append([KeyboardButton(text=x.name)])
 
 
                 buttons.append([KeyboardButton(text='Restart')])
