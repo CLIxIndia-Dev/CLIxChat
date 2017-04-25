@@ -131,12 +131,11 @@ def on_chat_message(msg):
                                       reply_markup=ReplyKeyboardMarkup(
                                              keyboard=buttons))
                     else:
-                        print("resize keyboard")
-                        bot.sendMessage(chat_id, x,
+                        newx = x[0:(len(x)/2)] + '\n' + x[len(x)/2:len(x)]
+                        bot.sendMessage(chat_id, newx,
                                     parse_mode='Markdown',
                             reply_markup=ReplyKeyboardMarkup(
-                                        keyboard=buttons,
-                                        resize_keyboard = True))
+                                        keyboard=buttons))
                     
         if not found:
             print("couldn't find chat text: ", chat_text)
