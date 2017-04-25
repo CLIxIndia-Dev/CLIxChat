@@ -105,7 +105,8 @@ def on_chat_message(msg):
                     element = last_element
                     for x in children:
                         if x.name is not None:
-                            buttons.append([KeyboardButton(text=x.name)])
+                            buttonName = x.name + '\n' + x.name
+                            buttons.append([KeyboardButton(text=buttonName)])
 
 
                 buttons.append([KeyboardButton(text='Restart')])
@@ -131,10 +132,7 @@ def on_chat_message(msg):
                                       reply_markup=ReplyKeyboardMarkup(
                                              keyboard=buttons))
                     else:
-                        #newx = x[0:(len(x)/2)] + '\n' + x[len(x)/2:len(x)]
-                        newx= x + '\n' + x
-                        print("new line!!")
-                        bot.sendMessage(chat_id, newx,
+                        bot.sendMessage(chat_id, x,
                                     parse_mode='Markdown',
                             reply_markup=ReplyKeyboardMarkup(
                                         keyboard=buttons))
