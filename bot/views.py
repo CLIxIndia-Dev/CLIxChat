@@ -87,7 +87,7 @@ def on_chat_message(msg):
                 if x.name is not None:
                     print("NAME: ",x.name)
                     buttons.append([KeyboardButton(text=x.name)])
-            i+=1
+        
             
 
         bot.sendMessage(chat_id, element.message_text,
