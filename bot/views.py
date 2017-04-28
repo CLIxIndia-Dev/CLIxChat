@@ -67,16 +67,21 @@ def on_chat_message(msg):
 
         element = Element.objects.get(pk=1) # not a great idea to search via pk, should prob use filter instead
         element2 = Element.objects.filter(level=0)
-        children = element.get_children()
+        nope = Element.objects.filter(level=100)
+        print("nope: ", nope)
+        print("nope1: ",nope[0])
+        #children = element.get_children()
         #for x in children:
          #   if x.name is not None:
           #      buttons.append([KeyboardButton(text=x.name)])
         i=1
-        while ((Element.objects.filter(level=i)).name != []):
-            name = (Element.objects.filter(level=i)).name
-            if name is not None:
-                print("NAME: ",name)
-                buttons.append([KeyboardButton(text=name)])
+        done=False
+        while done == False:
+            children = (Element.objects.filter(level=i))
+            for x in children:
+                if x.name is not None:
+                    print("NAME: ",name)
+                    buttons.append([KeyboardButton(text=name)])
             i+=1
             
 
