@@ -62,8 +62,14 @@ def on_chat_message(msg):
 
     # if content_type == 'text' and ( (msg['text'] == '/start') or (msg['text'] == 'Restart') or (seconds > 60) ):
     if content_type == 'text' and ( (msg['text'] == '/start') or (msg['text'] == 'Restart')):
+
+        bot.sendPhoto(chat_id, photo = "http://web.mit.edu/bhanks/www/robot.gif")
+
+
         if (seconds > 60):
             bot.sendMessage(chat_id, "Welcome back!")
+
+
 
         element = Element.objects.get(pk=1) # not a great idea to search via pk, should prob use filter instead
          
