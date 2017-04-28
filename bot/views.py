@@ -69,14 +69,16 @@ def on_chat_message(msg):
         element2 = Element.objects.filter(level=0)
         nope = Element.objects.filter(level=100)
         print("nope: ", nope)
-        print("nope1: ",nope[0])
+        if not nope.exists():
+            print("it's empty!!")
         #children = element.get_children()
         #for x in children:
          #   if x.name is not None:
           #      buttons.append([KeyboardButton(text=x.name)])
         i=1
-        done=False
-        while done == False:
+        # check that the queryset is not empty
+        # if it's empty then there's no more levels in the tree
+        while ((Element.objects.filter(level=i)).exists()):
             children = (Element.objects.filter(level=i))
             for x in children:
                 if x.name is not None:
