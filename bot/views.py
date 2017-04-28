@@ -157,6 +157,15 @@ def on_chat_message(msg):
                                       reply_markup=ReplyKeyboardMarkup(
                                              keyboard=buttons))
 
+                    elif (".gif" in x):
+                        result = re.search('((http[s]?):\/)?\/?([^:\/\s]+)((\/\w+)*\/)([\w\-\.]+[^#?\s]+)(.gif)', x)
+                        picurl = result.group(0) # just the url
+                        caption_txt = x.replace(picurl, "")
+                        bot.sendPhoto(chat_id, photo = picurl,
+                                      caption = caption_txt,
+                                      reply_markup=ReplyKeyboardMarkup(
+                                             keyboard=buttons))
+
                     else:
                         bot.sendMessage(chat_id, x,
                                     parse_mode='Markdown',
