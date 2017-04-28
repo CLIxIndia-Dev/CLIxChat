@@ -82,8 +82,8 @@ def on_chat_message(msg):
             children = (Element.objects.filter(level=i))
             for x in children:
                 if x.name is not None:
-                    print("NAME: ",name)
-                    buttons.append([KeyboardButton(text=name)])
+                    print("NAME: ",x.name)
+                    buttons.append([KeyboardButton(text=x.name)])
             i+=1
             
 
