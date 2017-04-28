@@ -20,7 +20,7 @@ from mptt.models import MPTTModel, TreeForeignKey
 
 
 class Element(MPTTModel):
-    name = models.CharField(max_length=200, blank=True)
+    name = models.CharField(max_length=42, blank=True)
     # default button response = nav back
     message_text = models.TextField(blank=True)
 
