@@ -63,13 +63,10 @@ def on_chat_message(msg):
     # if content_type == 'text' and ( (msg['text'] == '/start') or (msg['text'] == 'Restart') or (seconds > 60) ):
     if content_type == 'text' and ( (msg['text'] == '/start') or (msg['text'] == 'Restart')):
 
-        bot.sendPhoto(chat_id, photo = "http://web.mit.edu/bhanks/www/robot.gif")
-
+        bot.sendVideo(chat_id, video = "http://web.mit.edu/bhanks/www/robot.gif")
 
         if (seconds > 60):
             bot.sendMessage(chat_id, "Welcome back!")
-
-
 
         element = Element.objects.get(pk=1) # not a great idea to search via pk, should prob use filter instead
          
@@ -167,7 +164,7 @@ def on_chat_message(msg):
                         result = re.search('((http[s]?):\/)?\/?([^:\/\s]+)((\/\w+)*\/)([\w\-\.]+[^#?\s]+)(.gif)', x)
                         picurl = result.group(0) # just the url
                         caption_txt = x.replace(picurl, "")
-                        bot.sendPhoto(chat_id, photo = picurl,
+                        bot.sendVideo(chat_id, video = picurl,
                                       caption = caption_txt,
                                       reply_markup=ReplyKeyboardMarkup(
                                              keyboard=buttons))
