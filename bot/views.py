@@ -77,9 +77,9 @@ def on_chat_message(msg):
         print("element3 should be same as children: ", element3)
         nope = Element.objects.filter(level=100)
         print("nope: ",nope)
-        #for x in children:
-         #   if x.name is not None:
-          #      buttons.append([KeyboardButton(text=x.name)])
+        for x in children:
+            if x.name is not None:
+                buttons.append([KeyboardButton(text=x.name)])
        
             
 
