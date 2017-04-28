@@ -67,20 +67,21 @@ def on_chat_message(msg):
 
         element = Element.objects.get(pk=1) # not a great idea to search via pk, should prob use filter instead
         element2 = Element.objects.filter(level=0)
-        element3 = Element.objects.filter(level=1)
         print("element: ", element)
         print("element2: ", element2)
         children = element.get_children()
-        children2 = element2.get_descendants()
         print("children: ", children)
-        print("children2: ",children2)
-        print("element3 should be same as children: ", element3)
         nope = Element.objects.filter(level=100)
         print("nope: ",nope)
-        for x in children:
-            if x.name is not None:
-                buttons.append([KeyboardButton(text=x.name)])
-       
+        #for x in children:
+         #   if x.name is not None:
+          #      buttons.append([KeyboardButton(text=x.name)])
+        i=1
+        while ((Element.objects.filter(level=i)).name != []):
+            name = (Element.objects.filter(level=i)).name
+            if name is not None:
+                buttons.append([KeyboardButton(text=name)])
+            i+=1
             
 
         bot.sendMessage(chat_id, element.message_text,
