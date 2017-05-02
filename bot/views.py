@@ -119,8 +119,9 @@ def on_chat_message(msg):
                 # print('buttons: ', buttons)
 
                 msg = msg.split("~")
-                msg_r = msg
+                
                 for x in msg:
+                    msg_r = x
                     if (".pdf" in x):
                         # regex adapted from http://www.regextester.com/20
                         result = re.search('((http[s]?):\/)?\/?([^:\/\s]+)((\/\w+)*\/)([\w\-\.]+[^#?\s]+)(.pdf)', x)
@@ -179,17 +180,17 @@ def on_chat_message(msg):
                     reply_markup=ReplyKeyboardMarkup(
                                 keyboard=[[KeyboardButton(text='Restart')]]))
 
-    print("user, msg_s, msg_r, msg_pk, btns, button_list, start_time", userID, chat_text, msg_r, chat_id, buttons, button_list, current_time)
+    print("user, msg_s, msg_r, msg_pk, button_list, start_time", userID, chat_text, msg_r, chat_id, button_list, current_time)
 
 
-    #interaction = Interaction(User = userID,
-     #                         msg_s = chat_text,
-     #                         msg_r = msg_r[0],
-      #                        msg_pk = chat_id,
-       #                       btns = buttons,
-        #                      start_time = current_time
-         #                     )
-    #interaction.save()
+    interaction = Interaction(user = user,
+                              msg_s = chat_text,
+                              msg_r = msg_r,
+                              msg_pk = chat_id,
+                              btns = button_list,
+                              start_time = current_time
+    )
+    interaction.save()
 
     # print('element: ', element)    
     user.last_node=element
