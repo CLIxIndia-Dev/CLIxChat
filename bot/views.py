@@ -48,6 +48,7 @@ def on_chat_message(msg):
     buttons=[]
     chat_text = msg['text']
     msg_r = "" # message that user receives from bot
+    button_list = []
 
 
     # if content_type == 'text' and ( (msg['text'] == '/start') or (msg['text'] == 'Restart') or (seconds > 60) ):
@@ -167,13 +168,14 @@ def on_chat_message(msg):
                             reply_markup=ReplyKeyboardMarkup(
                                         keyboard=buttons))
 
-                    button_list = []
+                    
                     for b in buttons:
                        button_list.append(b.text)
                     
         if not found:
             print("couldn't find chat text: ", chat_text)
             msg_r = "I'm sorry, I don't understand."
+            button_list = ["I'm sorry, I don't understand."]
             bot.sendMessage(chat_id, "I'm sorry, I don't understand.",
                     reply_markup=ReplyKeyboardMarkup(
                                 keyboard=[[KeyboardButton(text='Restart')]]))
