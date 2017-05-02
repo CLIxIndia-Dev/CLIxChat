@@ -78,6 +78,7 @@ def on_chat_message(msg):
         # check that the queryset is not empty
         if (Element.objects.filter(level=1)).exists():
             children = (Element.objects.filter(level=1))
+            print("children: ",children)
             for x in children:
                 if x.name is not None:
                     buttons.append([KeyboardButton(text=x.name)])
