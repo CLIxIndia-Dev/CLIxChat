@@ -37,20 +37,18 @@ def makeSessionsKeyboard(course, numSessions):
 
 def on_chat_message(msg):
     content_type, chat_type, chat_id = telepot.glance(msg)
-    print('**Chat Message: ', content_type, chat_type, chat_id)
-    print('**from: ', msg['from']['id'])
+    print('Chat Message: ', content_type, chat_type, chat_id)
 
-    user = User.objects.get_or_create(id=chat_id) #returns a tuple
-    user = user[0]
+    user = (User.objects.get_or_create(id=chat_id))[0]
+    userID = msg['from']['id']
     current_time = datetime.datetime.now() # now() does not include timezone
     last = user.last_visit.replace(tzinfo=None) # set tzinfo to none so we can get difference
     hours = (current_time - last).seconds/3600
     seconds = (current_time - last).seconds
     buttons=[]
-    print('**User: ', user)
-    print('**current_time: ',current_time)
     chat_text = msg['text']
-    print('**chat_text: ',chat_text)
+    msg_r = "" # message that user receives from bot
+
 
     # if content_type == 'text' and ( (msg['text'] == '/start') or (msg['text'] == 'Restart') or (seconds > 60) ):
     if content_type == 'text' and ( (msg['text'] == '/start') or (msg['text'] == 'Restart')):
@@ -80,7 +78,7 @@ def on_chat_message(msg):
                                     keyboard=buttons))
 
 
-
+    # not /start
     else:
         # print('user last node pk: ', user.last_node.pk)
         last_element = Element.objects.get(pk=user.last_node.pk)
@@ -118,9 +116,8 @@ def on_chat_message(msg):
                 # print('buttons: ', buttons)
 
                 msg = msg.split("~")
+                msg_r = msg
                 for x in msg:
-                    print("**x: ", x)
-                    print("**chat_id: ",chat_id)
                     if (".pdf" in x):
                         # regex adapted from http://www.regextester.com/20
                         result = re.search('((http[s]?):\/)?\/?([^:\/\s]+)((\/\w+)*\/)([\w\-\.]+[^#?\s]+)(.pdf)', x)
@@ -172,12 +169,23 @@ def on_chat_message(msg):
                     
         if not found:
             print("couldn't find chat text: ", chat_text)
+            msg_r = "I'm sorry, I don't understand."
             bot.sendMessage(chat_id, "I'm sorry, I don't understand.",
                     reply_markup=ReplyKeyboardMarkup(
                                 keyboard=[[KeyboardButton(text='Restart')]]))
 
+    print("user, msg_s, msg_r, msg_pk, btns, start_time", user, msg_s, msg_r, msg_pk, btns, start_time)
 
-    # print('element: ', element)
+    interaction = Interaction(user = userID,
+                              msg_s = chat_text,
+                              msg_r = msg_r,
+                              msg_pk = chat_id,
+                              btns = buttons,
+                              start_time = current_time
+                              )
+    interaction.save()
+
+    # print('element: ', element)    
     user.last_node=element
     user.save()
 
