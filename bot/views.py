@@ -57,6 +57,7 @@ def on_chat_message(msg):
         bot.sendDocument(chat_id, document = "http://web.mit.edu/bhanks/www/robot.gif")
 
         if (seconds > 60):
+            msg_r = "Welcome back!"
             bot.sendMessage(chat_id, "Welcome back!")
 
         element = Element.objects.get(pk=1) # not a great idea to search via pk, should prob use filter instead
@@ -68,12 +69,12 @@ def on_chat_message(msg):
         # check that the queryset is not empty
         if (Element.objects.filter(level=1)).exists():
             children = (Element.objects.filter(level=1))
-            print("**children: ",children)
+            print("children: ",children)
             for x in children:
                 if x.name is not None:
-                    print("**x.name: ",x.name)
+                    button_list.append(x.name)
                     buttons.append([KeyboardButton(text=x.name)])
-
+        msg_r = "Welcome back! " + element.message_text
         bot.sendMessage(chat_id, element.message_text,
                         reply_markup=ReplyKeyboardMarkup(
                                     keyboard=buttons))
