@@ -59,7 +59,7 @@ def on_chat_message(msg):
         if (seconds > 60):
             msg_r = "Welcome back!"
             bot.sendMessage(chat_id, "Welcome back!")
-
+        msg_pk = 1
         element = Element.objects.get(pk=1) # not a great idea to search via pk, should prob use filter instead
         #children = element.get_children()
         #for x in children:
@@ -84,6 +84,7 @@ def on_chat_message(msg):
     else:
         # print('user last node pk: ', user.last_node.pk)
         last_element = Element.objects.get(pk=user.last_node.pk)
+        msg_pk = user.last_node.pk
         children = last_element.get_children()
         # print("children: ", children)
         # print("last element: ", last_element)
@@ -181,13 +182,13 @@ def on_chat_message(msg):
                     reply_markup=ReplyKeyboardMarkup(
                                 keyboard=[[KeyboardButton(text='Restart')]]))
 
-    print("user, msg_s, msg_r, msg_pk, button_list, start_time", userID, chat_text, msg_r, chat_id, button_list, current_time)
+    print("user, msg_s, msg_r, msg_pk, button_list, start_time", userID, chat_text, msg_r, msg_pk, button_list, current_time)
 
 
     interaction = Interaction(user = user,
                               msg_s = chat_text,
                               msg_r = msg_r,
-                              msg_pk = chat_id,
+                              msg_pk = msg_pk,
                               btns = button_list,
                               start_time = current_time
     )
