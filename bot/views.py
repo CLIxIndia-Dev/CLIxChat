@@ -3,7 +3,7 @@ import telepot
 from telepot.namedtuple import InlineKeyboardMarkup, InlineKeyboardButton, ReplyKeyboardMarkup, KeyboardButton
 from clixchat.settings import TOKEN
 from queue import Queue
-from .models import Element, User
+from .models import Element, User, Interaction
 import datetime
 import re
 #import pytz
@@ -21,22 +21,12 @@ links = {'course':'https://www.merriam-webster.com/dictionary/course',
          'demox':'https://www.edx.org/course/demox-edx-demox-1',
          'joinchat':'https://t.me/joinchat/AAAAAEG40y2c6F1dyoQyDg'}
 
-# later this function should access the database and grab
-# the number of units in a given course.
-# For now, this function just assumes the number of units is 5
-def getNumUnits(course):
-    return 5
-
 def makeUnitKeyboard(course, numUnits):
     buttons = []
     for i in range(1,numUnits+1):
         button = [KeyboardButton(text=str(course) + " Unit " + str(i))]
         buttons.append(button)
     return ReplyKeyboardMarkup(keyboard=buttons, one_time_keyboard=True,)
-
-# For now, this function assumes the number of sessions is the length of the string
-def getNumSessions(course):
-    return len(course)
 
 def makeSessionsKeyboard(course, numSessions):
     buttons = []
@@ -47,8 +37,8 @@ def makeSessionsKeyboard(course, numSessions):
 
 def on_chat_message(msg):
     content_type, chat_type, chat_id = telepot.glance(msg)
-    # print('Chat Message: ', content_type, chat_type, chat_id)
-    # print('from: ', msg['from']['id'])
+    print('**Chat Message: ', content_type, chat_type, chat_id)
+    print('**from: ', msg['from']['id'])
 
     user = User.objects.get_or_create(id=chat_id) #returns a tuple
     user = user[0]
@@ -57,8 +47,10 @@ def on_chat_message(msg):
     hours = (current_time - last).seconds/3600
     seconds = (current_time - last).seconds
     buttons=[]
-
+    print('**User: ', user)
+    print('**current_time: ',current_time)
     chat_text = msg['text']
+    print('**chat_text: ',chat_text)
 
     # if content_type == 'text' and ( (msg['text'] == '/start') or (msg['text'] == 'Restart') or (seconds > 60) ):
     if content_type == 'text' and ( (msg['text'] == '/start') or (msg['text'] == 'Restart')):
@@ -68,8 +60,7 @@ def on_chat_message(msg):
         if (seconds > 60):
             bot.sendMessage(chat_id, "Welcome back!")
 
-        element = Element.objects.get(pk=1) # not a great idea to search via pk, should prob use filter instead
-         
+        #element = Element.objects.get(pk=1) # not a great idea to search via pk, should prob use filter instead
         #children = element.get_children()
         #for x in children:
          #   if x.name is not None:
@@ -78,9 +69,10 @@ def on_chat_message(msg):
         # check that the queryset is not empty
         if (Element.objects.filter(level=1)).exists():
             children = (Element.objects.filter(level=1))
-            print("children: ",children)
+            print("**children: ",children)
             for x in children:
                 if x.name is not None:
+                    print("**x.name: ",x.name)
                     buttons.append([KeyboardButton(text=x.name)])
 
         bot.sendMessage(chat_id, element.message_text,
@@ -99,7 +91,7 @@ def on_chat_message(msg):
         for x in children:
             # print('msg text: ', chat_text)
             # # print('pk: ', x.pk)
-            print('obj name: ', x.name)
+            print('**obj name: ', x.name)
             if x.name == chat_text:
                 found = True
                 # print('msg name: ', x.name)
@@ -127,6 +119,8 @@ def on_chat_message(msg):
 
                 msg = msg.split("~")
                 for x in msg:
+                    print("**x: ", x)
+                    print("**chat_id: ",chat_id)
                     if (".pdf" in x):
                         # regex adapted from http://www.regextester.com/20
                         result = re.search('((http[s]?):\/)?\/?([^:\/\s]+)((\/\w+)*\/)([\w\-\.]+[^#?\s]+)(.pdf)', x)
