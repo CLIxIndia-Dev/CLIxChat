@@ -174,7 +174,7 @@ def on_chat_message(msg):
                     reply_markup=ReplyKeyboardMarkup(
                                 keyboard=[[KeyboardButton(text='Restart')]]))
 
-    print("user, msg_s, msg_r, msg_pk, btns, start_time", user, msg_s, msg_r, msg_pk, btns, start_time)
+    print("user, msg_s, msg_r, msg_pk, btns, start_time", user, chat_text, msg_r, chat_id, buttons, current_time)
 
     interaction = Interaction(user = userID,
                               msg_s = chat_text,
