@@ -68,6 +68,7 @@ def on_chat_message(msg):
         
         # check that the queryset is not empty
         if (Element.objects.filter(level=1)).exists():
+            element = Element.objects.filter(level=0)
             children = (Element.objects.filter(level=1))
             print("**children: ",children)
             for x in children:
