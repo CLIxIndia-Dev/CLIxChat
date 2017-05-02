@@ -176,7 +176,7 @@ def on_chat_message(msg):
 
     print("user, msg_s, msg_r, msg_pk, btns, start_time", user, chat_text, msg_r, chat_id, buttons, current_time)
 
-    interaction = Interaction(user = userID,
+    interaction = Interaction(User = userID,
                               msg_s = chat_text,
                               msg_r = msg_r,
                               msg_pk = chat_id,
