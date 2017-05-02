@@ -60,7 +60,7 @@ def on_chat_message(msg):
         if (seconds > 60):
             bot.sendMessage(chat_id, "Welcome back!")
 
-        #element = Element.objects.get(pk=1) # not a great idea to search via pk, should prob use filter instead
+        element = Element.objects.get(pk=1) # not a great idea to search via pk, should prob use filter instead
         #children = element.get_children()
         #for x in children:
          #   if x.name is not None:
@@ -68,7 +68,6 @@ def on_chat_message(msg):
         
         # check that the queryset is not empty
         if (Element.objects.filter(level=1)).exists():
-            element = Element.objects.filter(level=0)
             children = (Element.objects.filter(level=1))
             print("**children: ",children)
             for x in children:
