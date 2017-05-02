@@ -166,6 +166,10 @@ def on_chat_message(msg):
                                     parse_mode='Markdown',
                             reply_markup=ReplyKeyboardMarkup(
                                         keyboard=buttons))
+
+                    button_list = []
+                    for b in buttons:
+                       button_list.append(b.text)
                     
         if not found:
             print("couldn't find chat text: ", chat_text)
@@ -174,11 +178,13 @@ def on_chat_message(msg):
                     reply_markup=ReplyKeyboardMarkup(
                                 keyboard=[[KeyboardButton(text='Restart')]]))
 
-    print("user, msg_s, msg_r, msg_pk, btns, start_time", user, chat_text, msg_r, chat_id, buttons, current_time)
+    print("user, msg_s, msg_r, msg_pk, btns, button_list, start_time", userID, chat_text, msg_r[0], chat_id, buttons, button_list, current_time)
+
+    for buttons
 
     #interaction = Interaction(User = userID,
      #                         msg_s = chat_text,
-     #                         msg_r = msg_r,
+     #                         msg_r = msg_r[0],
       #                        msg_pk = chat_id,
        #                       btns = buttons,
         #                      start_time = current_time
