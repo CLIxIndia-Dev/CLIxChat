@@ -45,5 +45,5 @@ class Interaction(models.Model):
     start_time = models.DateTimeField(blank=False)
     response_time = models.DateTimeField(auto_now=True)
     def __str__(self):
-        return str(self.user)
+        return self.msg_r + " " + str(self.response_time - self.start_time)
 
