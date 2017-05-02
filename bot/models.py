@@ -34,4 +34,16 @@ class User(models.Model):
     last_node = models.ForeignKey(Element, null=True)
     last_visit = models.DateTimeField(auto_now=True)
     def __str__(self):
-        return str(self.id)
+        return (str(self.id) + " " + str(self.last_visit))
+
+class Interaction(models.Model):
+    user = models.ForeignKey(User, null=False)
+    msg_s = models.TextField(blank=True)
+    msg_r = models.TextField(blank=True)
+    msg_pk = models.IntegerField(blank=True)
+    btns = models.TextField(blank=True)
+    start_time = models.DateTimeField(blank=False)
+    response_time = models.DateTimeField(auto_now=True)
+    def __str__(self):
+        return str(self.user)
+
