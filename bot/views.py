@@ -110,6 +110,7 @@ def on_chat_message(msg):
                         if x.name is not None:
                             #new line character doesn't work
                             #buttonName = x.name + '\n' + x.name
+                            button_list.append(x.name)
                             buttons.append([KeyboardButton(text=x.name)])
 
 
@@ -168,9 +169,6 @@ def on_chat_message(msg):
                             reply_markup=ReplyKeyboardMarkup(
                                         keyboard=buttons))
 
-                    
-                    for b in buttons:
-                       button_list.append(b.text)
                     
         if not found:
             print("couldn't find chat text: ", chat_text)
