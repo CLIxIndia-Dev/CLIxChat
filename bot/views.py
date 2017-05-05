@@ -79,7 +79,7 @@ def on_chat_message(msg):
                                     keyboard=buttons))
 
     elif msg['text'] == "Back":
-        last_element = Element.objects.get(pk=user.last_node.pk) # the last last elt the user typed
+        last_element = Element.objects.get(pk=user.last_node.pk) 
         parent = last_element.parent
         children = parent.get_children()
         print("**buttons we want to display when we click back: ", children)
@@ -100,7 +100,12 @@ def on_chat_message(msg):
                     buttons.append([KeyboardButton(text=x.name)])
                     
         buttons.append([KeyboardButton(text='Back')])
-               
+
+        bot.sendMessage(chat_id, x,
+                        parse_mode='Markdown',
+                        reply_markup=ReplyKeyboardMarkup(
+                            keyboard=buttons))
+        
     # not /start or back
     else:
         # print('user last node pk: ', user.last_node.pk)
