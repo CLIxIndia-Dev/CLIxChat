@@ -78,30 +78,37 @@ def on_chat_message(msg):
                         reply_markup=ReplyKeyboardMarkup(
                                     keyboard=buttons))
 
-   # elif msg['text'] == "Back":
-    #    last_element = Element.objects.get(pk=user.last_node.pk) # the last last elt the user typed
-    #    print("**last elt, ", last_element)
-    #    parent = last_element.parent
-    #    print("**parent, ", parent)
-    #    sibs = last_element.get_siblings()
-    #    print("**sibs: ", sibs)
-    #    children = parent.get_children()
-    #    found = False
-        
+    elif msg['text'] == "Back":
+        last_element = Element.objects.get(pk=user.last_node.pk) # the last last elt the user typed
+        parent = last_element.parent
+        children = parent.get_children()
+        print("**buttons we want to display when we click back: ", children)
+        found = True
+        for x in children:
+           element = Element.objects.get(pk=x.pk) 
+           if x.name is not None:
+               button_list.append(x.name)
+               buttons.append([KeyboardButton(text=x.name)])
+
+        if len(buttons) == 0:
+            element = last_element
+            for x in children:
+                if x.name is not None:
+                    #new line character doesn't work
+                    #buttonName = x.name + '\n' + x.name
+                    button_list.append(x.name)
+                    buttons.append([KeyboardButton(text=x.name)])
+                    
+         buttons.append([KeyboardButton(text='Back')])
+               
     # not /start or back
     else:
         # print('user last node pk: ', user.last_node.pk)
         last_element = Element.objects.get(pk=user.last_node.pk)       
         msg_pk = user.last_node.pk
         print("last element: ", last_element)
-        if msg['text'] == "Back": 
-            parent = last_element.parent
-            print("**parent, ", parent)
-            children = parent.get_siblings()
-            print("**buttons we want to display when we click back: ", children)
-        else:
-            children = last_element.get_children()
-            print("**regular buttons we want to display: ", children)
+        children = last_element.get_children()
+        print("**regular buttons we want to display: ", children)
         found = False
         for x in children:
             # print('msg text: ', chat_text)
