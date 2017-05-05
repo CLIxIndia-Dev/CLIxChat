@@ -100,7 +100,8 @@ def on_chat_message(msg):
                     
         buttons.append([KeyboardButton(text='Back')])
 
-        msg = last_element.message_text
+        element = parent
+        msg = parent.message_text
                 
         bot.sendMessage(chat_id, msg,
                         parse_mode='Markdown',
