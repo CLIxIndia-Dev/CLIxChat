@@ -84,8 +84,7 @@ def on_chat_message(msg):
         children = parent.get_children()
         print("**buttons we want to display when we click back: ", children)
         found = True
-        for x in children:
-           element = Element.objects.get(pk=x.pk) 
+        for x in children: 
            if x.name is not None:
                button_list.append(x.name)
                buttons.append([KeyboardButton(text=x.name)])
@@ -101,7 +100,9 @@ def on_chat_message(msg):
                     
         buttons.append([KeyboardButton(text='Back')])
 
-        bot.sendMessage(chat_id, x,
+        msg = last_element.message_text
+                
+        bot.sendMessage(chat_id, msg,
                         parse_mode='Markdown',
                         reply_markup=ReplyKeyboardMarkup(
                             keyboard=buttons))
