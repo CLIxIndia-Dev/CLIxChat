@@ -200,8 +200,8 @@ def on_chat_message(msg):
     #interaction.save()
 
     # print('element: ', element)    
-    user.last_node=element
-    user.save()
+    #user.last_node=element
+    #user.save()
 
     # obj, created = AppSettings.objects.get_or_create(name='DEFAULT_LANG')
     # obj.value = request.POST.get('DEFAULT_LANG')
