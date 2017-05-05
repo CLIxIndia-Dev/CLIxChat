@@ -80,9 +80,10 @@ def on_chat_message(msg):
 
 
     elif msg['text'] == "Back":
-        print("**last node, ", Element.objects.get(user.last_node))
         back_element = Element.objects.get(pk=(user.last_node).last_node.pk)
         print("**back elt, ", back_element)
+        back_children = back_element.get_children()
+        print("**back children, ",back_children)
     # not /start or back
     else:
         # print('user last node pk: ', user.last_node.pk)
