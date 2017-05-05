@@ -55,7 +55,6 @@ def on_chat_message(msg):
     if content_type == 'text' and ( (msg['text'] == '/start') or (msg['text'] == 'Restart')):
 
         bot.sendDocument(chat_id, document = "http://web.mit.edu/bhanks/www/robot.gif")
-
         if (seconds > 60):
             msg_r = "Welcome back!"
             bot.sendMessage(chat_id, "Welcome back!")
@@ -80,7 +79,11 @@ def on_chat_message(msg):
                                     keyboard=buttons))
 
 
-    # not /start
+    elif msg['text'] == "Back":
+        print("**last node, " Element.objects.get(user.last_node))
+        back_element = Element.objects.get(pk=(user.last_node).last_node.pk)
+        print("**back elt, " back_element)
+    # not /start or back
     else:
         # print('user last node pk: ', user.last_node.pk)
         last_element = Element.objects.get(pk=user.last_node.pk)
