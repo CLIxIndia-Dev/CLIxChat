@@ -78,20 +78,18 @@ def on_chat_message(msg):
                         reply_markup=ReplyKeyboardMarkup(
                                     keyboard=buttons))
 
-
-    #elif msg['text'] == "Back":
-     #   last_element = Element.objects.get(pk=user.last_node.pk)
-      #  print("**last elt, ", last_element)
-       # back_children = last_element.parent
-       # print("**back children, ",back_children)
+    elif msg['text'] == "Back":
+        last_element = Element.objects.get(pk=user.last_node.pk)
+        print("**last elt, ", last_element)
+        parent = last_element.parent
+        print("**parent, ", parent)
+        sibs = last_element.get_siblings()
+        print("**sibs: ", sibs)
+        
     # not /start or back
     else:
         # print('user last node pk: ', user.last_node.pk)
-        last_element = Element.objects.get(pk=user.last_node.pk)
-        #parent = last_element.parent
-        #print("***parent: ", parent)
-        sibs = last_element.get_siblings()
-        print("sibs: ", sibs)
+        last_element = Element.objects.get(pk=user.last_node.pk)       
         msg_pk = user.last_node.pk
         children = last_element.get_children()
         # print("children: ", children)
@@ -125,7 +123,7 @@ def on_chat_message(msg):
                             buttons.append([KeyboardButton(text=x.name)])
 
 
-                buttons.append([KeyboardButton(text='Restart')])
+                buttons.append([KeyboardButton(text='Back')])
                 # print('buttons: ', buttons)
 
                 msg = msg.split("~")
@@ -188,19 +186,18 @@ def on_chat_message(msg):
             button_list = ["I'm sorry, I don't understand."]
             bot.sendMessage(chat_id, "I'm sorry, I don't understand.",
                     reply_markup=ReplyKeyboardMarkup(
-                                keyboard=[[KeyboardButton(text='Restart')]]))
+                                keyboard=[[KeyboardButton(text='Back')]]))
 
-    print("user, msg_s, msg_r, msg_pk, button_list, start_time", userID, chat_text, msg_r, msg_pk, button_list, current_time)
+    #print("user, msg_s, msg_r, msg_pk, button_list, start_time", userID, chat_text, msg_r, msg_pk, button_list, current_time)
 
-
-    interaction = Interaction(user = user,
-                              msg_s = chat_text,
-                              msg_r = msg_r,
-                              msg_pk = msg_pk,
-                              btns = button_list,
-                              start_time = current_time
-    )
-    interaction.save()
+    #interaction = Interaction(user = user,
+     #                         msg_s = chat_text,
+      #                        msg_r = msg_r,
+       #                       msg_pk = msg_pk,
+        #                      btns = button_list,
+         #                     start_time = current_time
+    #)
+    #interaction.save()
 
     # print('element: ', element)    
     user.last_node=element
