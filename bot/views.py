@@ -88,8 +88,10 @@ def on_chat_message(msg):
     else:
         # print('user last node pk: ', user.last_node.pk)
         last_element = Element.objects.get(pk=user.last_node.pk)
-        parent = last_element.parent
-        print("***parent: ", parent)
+        #parent = last_element.parent
+        #print("***parent: ", parent)
+        sibs = last_element.get_siblings()
+        print("sibs: ", sibs)
         msg_pk = user.last_node.pk
         children = last_element.get_children()
         # print("children: ", children)
