@@ -99,7 +99,7 @@ def on_chat_message(msg):
                     button_list.append(x.name)
                     buttons.append([KeyboardButton(text=x.name)])
                     
-         buttons.append([KeyboardButton(text='Back')])
+        buttons.append([KeyboardButton(text='Back')])
                
     # not /start or back
     else:
