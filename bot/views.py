@@ -35,6 +35,13 @@ def makeSessionsKeyboard(course, numSessions):
         buttons.append(button)
     return ReplyKeyboardMarkup(keyboard=buttons, one_time_keyboard=True,)
 
+def geturl(ext, x):
+    # regex adapted from http://www.regextester.com/20
+    result = re.search('((http[s]?):\/)?\/?([^:\/\s]+)((\/\w+)*\/)([\w\-\.]+[^#?\s]+)(' + ext + ')', x)
+    fileurl = result.group(0) # just the url
+    caption_txt = x.replace(fileurl, "")
+    return (result, fileurl, caption_txt)
+
 def on_chat_message(msg):
     content_type, chat_type, chat_id = telepot.glance(msg)
     print('Chat Message: ', content_type, chat_type, chat_id)
@@ -93,8 +100,6 @@ def on_chat_message(msg):
             element = last_element
             for x in children:
                 if x.name is not None:
-                    #new line character doesn't work
-                    #buttonName = x.name + '\n' + x.name
                     button_list.append(x.name)
                     buttons.append([KeyboardButton(text=x.name)])
                     
@@ -153,10 +158,10 @@ def on_chat_message(msg):
                 for x in msg:
                     msg_r = x
                     if (".pdf" in x):
-                        # regex adapted from http://www.regextester.com/20
-                        result = re.search('((http[s]?):\/)?\/?([^:\/\s]+)((\/\w+)*\/)([\w\-\.]+[^#?\s]+)(.pdf)', x)
-                        fileurl = result.group(0) # just the url
-                        caption_txt = x.replace(fileurl, "")
+                        (result, fileurl, caption_txt) = geturl(".pdf", x)
+                        #result = re.search('((http[s]?):\/)?\/?([^:\/\s]+)((\/\w+)*\/)([\w\-\.]+[^#?\s]+)(.pdf)', x)
+                        #fileurl = result.group(0) # just the url
+                        #caption_txt = x.replace(fileurl, "")
                         bot.sendDocument(chat_id, document = fileurl,
                                          caption = caption_txt,
                                          reply_markup=ReplyKeyboardMarkup(
