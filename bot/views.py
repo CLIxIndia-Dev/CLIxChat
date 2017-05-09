@@ -86,9 +86,7 @@ def on_chat_message(msg):
             bot.sendMessage(chat_id, "Welcome back!")
         msg_pk = 1
         element = Element.objects.get(pk=1) # not a great idea to search via pk, should prob use filter instead
-        print('ELEMENT : ', element)
-        print('TYPE: ', type(element))
-        element_filter = Element.objects.filter(level=0)[0].name
+        #element = Element.objects.filter(level=0)[0].name # this is a string not an element object
         #children = element.get_children()
         #for x in children:
          #   if x.name is not None:
@@ -223,14 +221,14 @@ def on_chat_message(msg):
 
     #print("user, msg_s, msg_r, msg_pk, button_list, start_time", userID, chat_text, msg_r, msg_pk, button_list, current_time)
 
-    #interaction = Interaction(user = user,
-     #                         msg_s = chat_text,
-      #                        msg_r = msg_r,
-       #                       msg_pk = msg_pk,
-        #                      btns = button_list,
-         #                     start_time = current_time
-    #)
-    #interaction.save()
+    interaction = Interaction(user = user,
+                              msg_s = chat_text,
+                              msg_r = msg_r,
+                              msg_pk = msg_pk,
+                              btns = button_list,
+                              start_time = current_time
+    )
+    interaction.save()
 
     # print('element: ', element)    
     user.last_node=element
