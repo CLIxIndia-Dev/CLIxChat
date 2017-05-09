@@ -35,16 +35,34 @@ def makeSessionsKeyboard(course, numSessions):
         buttons.append(button)
     return ReplyKeyboardMarkup(keyboard=buttons, one_time_keyboard=True,)
 
-# not done yet
-#def geturl(ext, x, buttons):
+# Helper function for on_chat_message that
+# gets the url and sends it accordingly
+def geturl(ext, x, buttons):
     # regex adapted from http://www.regextester.com/20
-    #result = re.search('((http[s]?):\/)?\/?([^:\/\s]+)((\/\w+)*\/)([\w\-\.]+[^#?\s]+)(' + ext + ')', x)
-    #fileurl = result.group(0) # just the url
-
-    #if ext == ".pdf":
+    result = re.search('((http[s]?):\/)?\/?([^:\/\s]+)((\/\w+)*\/)([\w\-\.]+[^#?\s]+)(' + ext + ')', x)
+    fileurl = result.group(0) # just the url
+    caption_txt = x.replace(fileurl, "")
     
-    #caption_txt = x.replace(fileurl, "")
-    #return (result, fileurl, caption_txt)
+    if ext == ".pdf" or ext == ".gif":
+        bot.sendDocument(chat_id, document = fileurl,
+                         caption = caption_txt,
+                         reply_markup=ReplyKeyboardMarkup(
+                             keyboard=buttons))
+
+    elif ext == ".mp3":
+        bot.sendAudio(chat_id, audio = fileurl,
+                      caption = caption_txt,
+                      reply_markup=ReplyKeyboardMarkup(
+                          keyboard=buttons))
+
+    elif ext == ".jpg" or ext == ".png":
+        bot.sendPhoto(chat_id, photo = fileurl,
+                      caption = caption_txt,
+                      reply_markup=ReplyKeyboardMarkup(
+                          keyboard=buttons))
+
+    return (result, fileurl, caption_txt)
+
 
 def on_chat_message(msg):
     content_type, chat_type, chat_id = telepot.glance(msg)
@@ -176,48 +194,15 @@ def on_chat_message(msg):
                     msg_r = x
                     
                     if (".pdf" in x):
-                        (result, fileurl, caption_txt) = geturl(".pdf", x)
-                        result = re.search('((http[s]?):\/)?\/?([^:\/\s]+)((\/\w+)*\/)([\w\-\.]+[^#?\s]+)(.pdf)', x)
-                        fileurl = result.group(0) # just the url
-                        caption_txt = x.replace(fileurl, "")
-                        bot.sendDocument(chat_id, document = fileurl,
-                                         caption = caption_txt,
-                                         reply_markup=ReplyKeyboardMarkup(
-                                             keyboard=buttons))
+                        geturl(".pdf", x, buttons)
                     elif (".mp3" in x):
-                        result = re.search('((http[s]?):\/)?\/?([^:\/\s]+)((\/\w+)*\/)([\w\-\.]+[^#?\s]+)(.mp3)', x)
-                        audiourl = result.group(0) # just the url
-                        caption_txt = x.replace(audiourl, "")
-                        bot.sendAudio(chat_id, audio = audiourl,
-                                      caption = caption_txt,
-                                      reply_markup=ReplyKeyboardMarkup(
-                                             keyboard=buttons))
+                        geturl(".mp3", x, buttons)                       
                     elif (".jpg" in x):
-                        result = re.search('((http[s]?):\/)?\/?([^:\/\s]+)((\/\w+)*\/)([\w\-\.]+[^#?\s]+)(.jpg)', x)
-                        picurl = result.group(0) # just the url
-                        caption_txt = x.replace(picurl, "")
-                        bot.sendPhoto(chat_id, photo = picurl,
-                                      caption = caption_txt,
-                                      reply_markup=ReplyKeyboardMarkup(
-                                             keyboard=buttons))
+                        geturl(".jpg", x, buttons)
                     elif (".png" in x):
-                        result = re.search('((http[s]?):\/)?\/?([^:\/\s]+)((\/\w+)*\/)([\w\-\.]+[^#?\s]+)(.png)', x)
-                        picurl = result.group(0) # just the url
-                        caption_txt = x.replace(picurl, "")
-                        bot.sendPhoto(chat_id, photo = picurl,
-                                      caption = caption_txt,
-                                      reply_markup=ReplyKeyboardMarkup(
-                                             keyboard=buttons))
-
+                        geturl(".png", x, buttons)                      
                     elif (".gif" in x):
-                        result = re.search('((http[s]?):\/)?\/?([^:\/\s]+)((\/\w+)*\/)([\w\-\.]+[^#?\s]+)(.gif)', x)
-                        picurl = result.group(0) # just the url
-                        caption_txt = x.replace(picurl, "")
-                        bot.sendDocument(chat_id, document = picurl,
-                                      caption = caption_txt,
-                                      reply_markup=ReplyKeyboardMarkup(
-                                             keyboard=buttons))
-
+                        geturl(".gif", x, buttons)
                     else:
                         bot.sendMessage(chat_id, x,
                                     parse_mode='Markdown',
