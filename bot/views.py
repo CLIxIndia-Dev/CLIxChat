@@ -85,12 +85,8 @@ def on_chat_message(msg):
             msg_r = "Welcome back!"
             bot.sendMessage(chat_id, "Welcome back!")
         msg_pk = 1
-        element = Element.objects.get(pk=1) # not a great idea to search via pk, should prob use filter instead
-        print("ELEMENT: ", element)
-        filter_element = Element.objects.filter(level=0)
-        print("FILTER-ELEMENT: ", filter_element)
-        filter_name = Element.objects.filter(level=0)[0].name
-        print("NAME: ", filter_name)
+        #element = Element.objects.get(pk=1) # not a great idea to search via pk, should prob use filter instead
+        element = Element.objects.filter(level=0)[0].name
         #children = element.get_children()
         #for x in children:
          #   if x.name is not None:
