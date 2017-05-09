@@ -171,7 +171,7 @@ def on_chat_message(msg):
                 for x in msg:
                     msg_r = x
                     
-                    elif (".pdf" in x):
+                    if (".pdf" in x):
                         (result, fileurl, caption_txt) = geturl(".pdf", x)
                         result = re.search('((http[s]?):\/)?\/?([^:\/\s]+)((\/\w+)*\/)([\w\-\.]+[^#?\s]+)(.pdf)', x)
                         fileurl = result.group(0) # just the url
