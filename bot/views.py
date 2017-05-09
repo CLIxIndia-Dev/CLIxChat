@@ -141,6 +141,7 @@ def on_chat_message(msg):
         print("FEEDBACK: ",feedback)
         ### we need to store this feedback somewhere
         element = Element.objects.get(pk=user.last_node.pk)
+        msg_pk = user.last_node.pk
         buttons.append([KeyboardButton(text='Restart')])
         msg_r = "Thank you for your feedback. You can enter another questions using the ^ character, or you can click Restart."
         bot.sendMessage(chat_id,
