@@ -89,7 +89,7 @@ def on_chat_message(msg):
         element = Element.objects.filter(level=0)[0].name
         print("VALUES: ", Element.objects.filter(level=0).values())
         print("MSG SET: ", Element.objects.filter(level=0).values("message_text"))
-        print("MSG: ", Element.objects.filter(level=0).values("message_text")[0])
+        print("MSG: ", Element.objects.filter(level=0).values("message_text")[0]["message_text"])
         #children = element.get_children()
         #for x in children:
          #   if x.name is not None:
@@ -103,8 +103,11 @@ def on_chat_message(msg):
                 if x.name is not None:
                     button_list.append(x.name)
                     buttons.append([KeyboardButton(text=x.name)])
-        msg_r = "Welcome back! " + element.message_text
-        bot.sendMessage(chat_id, element.message_text,
+        #msg_r = "Welcome back! " + element.message_text
+        message = Element.objects.filter(level=0).values("message_text")[0]["message_text"]
+        msg_r = "Welcome back! " + message
+        bot.sendMessage(chat_id,
+                        message, # element.message_text
                         reply_markup=ReplyKeyboardMarkup(
                                     keyboard=buttons))
 
