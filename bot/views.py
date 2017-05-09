@@ -161,7 +161,7 @@ def on_chat_message(msg):
                     buttons=[KeyboardButton(text="/start")]
                     msg_r = "Thank you for your feedback. You can enter another questions using the ^ character, or you can click start"
                     bot.sendMessage(chat_id,
-                                    msg_r
+                                    msg_r,
                                     parse_mode='Markdown',
                                     reply_markup=ReplyKeyboardMarkup(
                                         keyboard=buttons))
