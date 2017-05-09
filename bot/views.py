@@ -120,7 +120,8 @@ def on_chat_message(msg):
     # not /start or back
     else:
         # print('user last node pk: ', user.last_node.pk)
-        last_element = Element.objects.get(pk=user.last_node.pk)       
+        last_element = Element.objects.get(pk=user.last_node.pk)
+        element = last_element
         msg_pk = user.last_node.pk
         print("last element: ", last_element)
         children = last_element.get_children()
@@ -159,7 +160,7 @@ def on_chat_message(msg):
                 
                 for x in msg:
                     msg_r = x
-
+                    print("CHAT TEXT: ",chat_text)
                     if "^" in chat_text: # if user sends a ^ to the bot
                         print("SENT CARROT!")
                         feedback = chat_text.split("^")[1] # get text after ^
