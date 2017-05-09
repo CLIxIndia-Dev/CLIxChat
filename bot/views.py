@@ -87,7 +87,7 @@ def on_chat_message(msg):
         msg_pk = 1
         #element = Element.objects.get(pk=1) # not a great idea to search via pk, should prob use filter instead
         element = Element.objects.filter(level=0)[0].name
-        print("VALUES: ", Element.objects.filter(level=0).values()
+        print("VALUES: ", Element.objects.filter(level=0).values())
         #children = element.get_children()
         #for x in children:
          #   if x.name is not None:
