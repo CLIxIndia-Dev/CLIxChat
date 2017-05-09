@@ -37,7 +37,7 @@ def makeSessionsKeyboard(course, numSessions):
 
 # Helper function for on_chat_message that
 # gets the url and sends it accordingly
-def geturl(ext, x, buttons):
+def geturl(ext, x, buttons, chat_id):
     # regex adapted from http://www.regextester.com/20
     result = re.search('((http[s]?):\/)?\/?([^:\/\s]+)((\/\w+)*\/)([\w\-\.]+[^#?\s]+)(' + ext + ')', x)
     fileurl = result.group(0) # just the url
@@ -194,15 +194,15 @@ def on_chat_message(msg):
                     msg_r = x
                     
                     if (".pdf" in x):
-                        geturl(".pdf", x, buttons)
+                        geturl(".pdf", x, buttons, chat_id)
                     elif (".mp3" in x):
-                        geturl(".mp3", x, buttons)                       
+                        geturl(".mp3", x, buttons, chat_id)                     
                     elif (".jpg" in x):
-                        geturl(".jpg", x, buttons)
+                        geturl(".jpg", x, buttons, chat_id)
                     elif (".png" in x):
-                        geturl(".png", x, buttons)                      
+                        geturl(".png", x, buttons, chat_id                      
                     elif (".gif" in x):
-                        geturl(".gif", x, buttons)
+                        geturl(".gif", x, buttons, chat_id)
                     else:
                         bot.sendMessage(chat_id, x,
                                     parse_mode='Markdown',
