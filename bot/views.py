@@ -200,7 +200,7 @@ def on_chat_message(msg):
                     elif (".jpg" in x):
                         geturl(".jpg", x, buttons, chat_id)
                     elif (".png" in x):
-                        geturl(".png", x, buttons, chat_id                      
+                        geturl(".png", x, buttons, chat_id)                   
                     elif (".gif" in x):
                         geturl(".gif", x, buttons, chat_id)
                     else:
