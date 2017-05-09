@@ -89,7 +89,7 @@ def on_chat_message(msg):
         element = Element.objects.filter(level=0)[0].name
         print("VALUES: ", Element.objects.filter(level=0).values())
         print("MSG SET: ", Element.objects.filter(level=0).values("message_text"))
-        print("MSG: ", Element.objects.filter(level=0).values("message_text")["message_text"]))
+        print("MSG: ", Element.objects.filter(level=0).values("message_text")["message_text"])
         #children = element.get_children()
         #for x in children:
          #   if x.name is not None:
