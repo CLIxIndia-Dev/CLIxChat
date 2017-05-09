@@ -154,24 +154,26 @@ def on_chat_message(msg):
                             buttons.append([KeyboardButton(text=x.name)])
                 buttons.append([KeyboardButton(text='Back')])
                 # print('buttons: ', buttons)
-
-                if "^" in chat_text: # if user sends a ^ to the bot
-                    feedback = chat_text.split("^")[1] # get text after ^
-                    ### we need to store this feedback somewhere
-                    buttons=[KeyboardButton(text="/start")]
-                    msg_r = "Thank you for your feedback. You can enter another questions using the ^ character, or you can click start"
-                    bot.sendMessage(chat_id,
-                                    msg_r,
-                                    parse_mode='Markdown',
-                                    reply_markup=ReplyKeyboardMarkup(
-                                        keyboard=buttons))
                     
                 msg = msg.split("~")
                 
                 for x in msg:
                     msg_r = x
+
+                    if "^" in chat_text: # if user sends a ^ to the bot
+                        print("SENT CARROT!")
+                        feedback = chat_text.split("^")[1] # get text after ^
+                        print("FEEDBACK: ",feedback)
+                        ### we need to store this feedback somewhere
+                        buttons=[KeyboardButton(text="/start")]
+                        msg_r = "Thank you for your feedback. You can enter another questions using the ^ character, or you can click start"
+                        bot.sendMessage(chat_id,
+                                        msg_r,
+                                        parse_mode='Markdown',
+                                        reply_markup=ReplyKeyboardMarkup(
+                                            keyboard=buttons))
                     
-                    if (".pdf" in x):
+                    elif (".pdf" in x):
                         (result, fileurl, caption_txt) = geturl(".pdf", x)
                         result = re.search('((http[s]?):\/)?\/?([^:\/\s]+)((\/\w+)*\/)([\w\-\.]+[^#?\s]+)(.pdf)', x)
                         fileurl = result.group(0) # just the url
