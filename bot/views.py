@@ -138,7 +138,7 @@ def on_chat_message(msg):
                 feedback = chat_text.split("^")[1] # get text after ^
                 print("FEEDBACK: ",feedback)
                 ### we need to store this feedback somewhere
-                buttons=[KeyboardButton(text="/start")]
+                buttons.append([KeyboardButton(text='Restart')])
                 msg_r = "Thank you for your feedback. You can enter another questions using the ^ character, or you can click start"
                 bot.sendMessage(chat_id,
                                 msg_r,
