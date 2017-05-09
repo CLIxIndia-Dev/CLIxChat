@@ -117,19 +117,18 @@ def on_chat_message(msg):
                         reply_markup=ReplyKeyboardMarkup(
                             keyboard=buttons))
 
-    elif:          
-        if "^" in chat_text: # if user sends a ^ to the bot
-            print("SENT CARROT!")
-            feedback = chat_text.split("^")[1] # get text after ^
-            print("FEEDBACK: ",feedback)
-            ### we need to store this feedback somewhere
-            buttons.append([KeyboardButton(text='Restart')])
-            msg_r = "Thank you for your feedback. You can enter another questions using the ^ character, or you can click start."
-            bot.sendMessage(chat_id,
-                            msg_r,
-                            parse_mode='Markdown',
-                            reply_markup=ReplyKeyboardMarkup(
-                                keyboard=buttons))
+    elif "^" in chat_text: # if user sends a ^ to the bot
+        print("SENT CARROT!")
+        feedback = chat_text.split("^")[1] # get text after ^
+        print("FEEDBACK: ",feedback)
+        ### we need to store this feedback somewhere
+        buttons.append([KeyboardButton(text='Restart')])
+        msg_r = "Thank you for your feedback. You can enter another questions using the ^ character, or you can click start."
+        bot.sendMessage(chat_id,
+                        msg_r,
+                        parse_mode='Markdown',
+                        reply_markup=ReplyKeyboardMarkup(
+                            keyboard=buttons))
             
     # not /start or back
     else:
