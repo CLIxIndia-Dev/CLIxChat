@@ -48,19 +48,16 @@ def geturl(ext, x, buttons, chat_id):
                          caption = caption_txt,
                          reply_markup=ReplyKeyboardMarkup(
                              keyboard=buttons))
-
     elif ext == ".mp3":
         bot.sendAudio(chat_id, audio = fileurl,
                       caption = caption_txt,
                       reply_markup=ReplyKeyboardMarkup(
                           keyboard=buttons))
-
     elif ext == ".jpg" or ext == ".png":
         bot.sendPhoto(chat_id, photo = fileurl,
                       caption = caption_txt,
                       reply_markup=ReplyKeyboardMarkup(
                           keyboard=buttons))
-
     return (result, fileurl, caption_txt)
 
 
@@ -89,6 +86,9 @@ def on_chat_message(msg):
             bot.sendMessage(chat_id, "Welcome back!")
         msg_pk = 1
         element = Element.objects.get(pk=1) # not a great idea to search via pk, should prob use filter instead
+        print("ELEMENT: ", element)
+        filter_element = Element.objects.filter(level=0)
+        print("FILTER-ELEMENT: ", filter_element)
         #children = element.get_children()
         #for x in children:
          #   if x.name is not None:
@@ -141,7 +141,7 @@ def on_chat_message(msg):
         ### we need to store this feedback somewhere
         element = Element.objects.get(pk=user.last_node.pk)
         buttons.append([KeyboardButton(text='Restart')])
-        msg_r = "Thank you for your feedback. You can enter another questions using the ^ character, or you can click start."
+        msg_r = "Thank you for your feedback. You can enter another questions using the ^ character, or you can click Restart."
         bot.sendMessage(chat_id,
                         msg_r,
                         parse_mode='Markdown',
@@ -368,8 +368,6 @@ def on_chat_message(msg):
     #
     # elif content_type == 'text':
     #     bot.sendMessage(chat_id, msg['text'])
-
-
 
 
 bot = telepot.Bot(TOKEN)
