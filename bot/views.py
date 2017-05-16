@@ -111,11 +111,10 @@ def on_chat_message(msg):
         parent = last_element.parent
         children = parent.get_children()
         msg_pk = user.last_node.pk
-        print("**buttons we want to display when we click back: ", children)
+        print("buttons we want to display when we click back: ", children)
         found = True
         for x in children: 
            if x.name is not None:
-               print("**adding to the button list")
                button_list.append(x.name)
                buttons.append([KeyboardButton(text=x.name)])
 
@@ -138,8 +137,8 @@ def on_chat_message(msg):
 
     elif "^" in chat_text: # if user sends a ^ to the bot
         feedback = chat_text.split("^")[1] # get text after ^
+        chat_text = feedback # save the message without the ^ in the database
         print("FEEDBACK: ",feedback)
-        ### we need to store this feedback somewhere
         element = Element.objects.get(pk=user.last_node.pk)
         msg_pk = user.last_node.pk
         buttons.append([KeyboardButton(text='Restart')])
