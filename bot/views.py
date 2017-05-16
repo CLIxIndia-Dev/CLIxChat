@@ -76,8 +76,6 @@ def on_chat_message(msg):
     msg_r = "" # message that user receives from bot
     button_list = []
 
-
-    # if content_type == 'text' and ( (msg['text'] == '/start') or (msg['text'] == 'Restart') or (seconds > 60) ):
     if content_type == 'text' and ( (msg['text'] == '/start') or (msg['text'] == 'Restart')):
 
         bot.sendDocument(chat_id, document = "http://web.mit.edu/bhanks/www/robot.gif")
@@ -112,10 +110,12 @@ def on_chat_message(msg):
         last_element = Element.objects.get(pk=user.last_node.pk) 
         parent = last_element.parent
         children = parent.get_children()
+        msg_pk = user.last_node.pk
         print("**buttons we want to display when we click back: ", children)
         found = True
         for x in children: 
            if x.name is not None:
+               print("**adding to the button list")
                button_list.append(x.name)
                buttons.append([KeyboardButton(text=x.name)])
 
