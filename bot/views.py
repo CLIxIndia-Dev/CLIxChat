@@ -62,7 +62,7 @@ def on_chat_message(msg):
     msg_r = "" # message that user receives from bot
     button_list = []
 
-    if content_type == 'text' and ( (msg['text'] == '/start') or (msg['text'] == 'Restart')):
+    if content_type == 'text' and ( (chat_text == '/start') or (chat_text == 'Restart')):
 
         # Optional greeting graphic
         # bot.sendDocument(chat_id, document = "http://web.mit.edu/bhanks/www/robot.gif")
@@ -122,7 +122,9 @@ def on_chat_message(msg):
                         reply_markup=ReplyKeyboardMarkup(
                             keyboard=buttons))
 
-    elif "^" in chat_text: # if user sends a ^ to the bot
+
+
+
         feedback = chat_text.split("^")[1] # get text after ^
         chat_text = feedback # save the message without the ^ in the database
         print("FEEDBACK: ",feedback)
@@ -136,7 +138,10 @@ def on_chat_message(msg):
                         parse_mode='Markdown',
                         reply_markup=ReplyKeyboardMarkup(
                             keyboard=buttons))
-            
+
+
+
+
     # not /start or back
     else:
         # print('user last node pk: ', user.last_node.pk)
@@ -198,8 +203,28 @@ def on_chat_message(msg):
                             reply_markup=ReplyKeyboardMarkup(
                                         keyboard=buttons))
 
-                    
+
         if not found:
+            last_element = Element.objects.get(pk=user.last_node.pk)
+
+            if "^" in last_element.message_text: # if user sends a ^ to the bot
+                print("carat found")
+                    # feedback = chat_text.split("^")[1] # get text after ^
+                    # chat_text = feedback # save the message without the ^ in the database
+                    # print("FEEDBACK: ",feedback)
+                    # element = Element.objects.get(pk=user.last_node.pk)
+                    # msg_pk = user.last_node.pk
+                    # buttons.append([KeyboardButton(text='Restart')])
+                    # button_list = ['Restart'] # this is for Interactions object
+                    # msg_r = "Thank you for your feedback. You can enter another questions using the ^ character, or you can click Restart."
+                    # bot.sendMessage(chat_id,
+                    #                 msg_r,
+                    #                 parse_mode='Markdown',
+                    #                 reply_markup=ReplyKeyboardMarkup(
+                    #                     keyboard=buttons))
+
+
+
             print("couldn't find chat text: ", chat_text)
             msg_r = "I'm sorry, I don't understand."
             button_list = ["I'm sorry, I don't understand."]
