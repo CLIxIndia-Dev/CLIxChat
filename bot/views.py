@@ -126,22 +126,6 @@ def on_chat_message(msg):
 
 
 
-        feedback = chat_text.split("^")[1] # get text after ^
-        chat_text = feedback # save the message without the ^ in the database
-        print("FEEDBACK: ",feedback)
-        element = Element.objects.get(pk=user.last_node.pk)
-        msg_pk = user.last_node.pk
-        buttons.append([KeyboardButton(text='Restart')])
-        button_list = ['Restart'] # this is for Interactions object
-        msg_r = "Thank you for your feedback. You can enter another questions using the ^ character, or you can click Restart."
-        bot.sendMessage(chat_id,
-                        msg_r,
-                        parse_mode='Markdown',
-                        reply_markup=ReplyKeyboardMarkup(
-                            keyboard=buttons))
-
-
-
 
     # not /start or back
     else:
@@ -223,6 +207,27 @@ def on_chat_message(msg):
                     #                 parse_mode='Markdown',
                     #                 reply_markup=ReplyKeyboardMarkup(
                     #                     keyboard=buttons))
+        #
+        #               feedback = chat_text.split("^")[1] # get text after ^
+        # chat_text = feedback # save the message without the ^ in the database
+        # print("FEEDBACK: ",feedback)
+        # element = Element.objects.get(pk=user.last_node.pk)
+        # msg_pk = user.last_node.pk
+        # buttons.append([KeyboardButton(text='Restart')])
+        # button_list = ['Restart'] # this is for Interactions object
+        # msg_r = "Thank you for your feedback. You can enter another questions using the ^ character, or you can click Restart."
+        # bot.sendMessage(chat_id,
+        #                 msg_r,
+        #                 parse_mode='Markdown',
+        #                 reply_markup=ReplyKeyboardMarkup(
+        #                     keyboard=buttons))
+        #
+
+
+
+
+
+
 
 
 
