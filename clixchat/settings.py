@@ -27,7 +27,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['clixchat.herokuapp.com',
                  'localhost',
-                 '127.0.0.1']
+                 '127.0.0.1',
+                 '103.36.84.150',
+                 '18.111.74.240']
 
 
 # Application definition
