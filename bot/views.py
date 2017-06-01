@@ -99,10 +99,10 @@ def on_chat_message(msg):
     elif chat_text == "Back":
         last_element = Element.objects.get(pk=user.last_node.pk)
         if last_element.is_root_node():
+            parent = last_element
             children = last_element.get_children()
         else:
             parent = last_element.parent
-            # print("parent: ", parent)
             children = parent.get_children()
         msg_pk = user.last_node.pk
         print("buttons we want to display when we click back: ", children)
