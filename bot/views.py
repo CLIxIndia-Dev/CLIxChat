@@ -70,8 +70,11 @@ def on_chat_message(msg):
             msg_r = "Welcome back!"
             bot.sendMessage(chat_id, "Welcome back!")
         msg_pk = 1
-        element = Element.objects.get(pk=1) # not a great idea to search via pk, should prob use filter instead
-        #element = Element.objects.filter(level=0)[0].name # this is a string not an element object
+        # element = Element.objects.get(pk=1) # not a great idea to search via pk, should prob use filter instead
+        top_level_elements = Element.objects.filter(level=0) # this is a string not an element object
+        for x in top_level_elements:
+            if str.lower(x.name) == "start":
+                element = x
         #children = element.get_children()
         #for x in children:
          #   if x.name is not None:
