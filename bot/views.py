@@ -97,10 +97,13 @@ def on_chat_message(msg):
                                     keyboard=buttons))
 
     elif chat_text == "Back":
-        last_element = Element.objects.get(pk=user.last_node.pk) 
-        parent = last_element.parent
-        print("parent: ", parent)
-        children = parent.get_children()
+        last_element = Element.objects.get(pk=user.last_node.pk)
+        if last_element.is_root_node():
+            children = last_element.get_children()
+        else:
+            parent = last_element.parent
+            # print("parent: ", parent)
+            children = parent.get_children()
         msg_pk = user.last_node.pk
         print("buttons we want to display when we click back: ", children)
         found = True
@@ -237,7 +240,7 @@ def on_chat_message(msg):
 
             print("couldn't find chat text: ", chat_text)
             msg_r = "I'm sorry, I don't understand."
-            button_list = ["I'm sorry, I don't understand."]
+            # button_list = ["I'm sorry, I don't understand."]
             bot.sendMessage(chat_id, "I'm sorry, I don't understand.",
                     reply_markup=ReplyKeyboardMarkup(
                                 keyboard=[[KeyboardButton(text='Back')]]))
