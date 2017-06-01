@@ -192,7 +192,7 @@ def on_chat_message(msg):
         if not found:
             last_element = Element.objects.get(pk=user.last_node.pk)
 
-            if "^" in last_element.message_text: # if user sends a ^ to the bot
+            if "^" in last_element.message_text: 
                 print("carat found")
                     # feedback = chat_text.split("^")[1] # get text after ^
                     # chat_text = feedback # save the message without the ^ in the database
