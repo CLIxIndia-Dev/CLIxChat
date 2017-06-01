@@ -112,8 +112,9 @@ def on_chat_message(msg):
                 if x.name is not None:
                     button_list.append(x.name)
                     buttons.append([KeyboardButton(text=x.name)])
-        if parent != last_element.get_root():
+        if not parent.is_root_node():
             buttons.append([KeyboardButton(text='Back')])
+
 
         element = parent
         msg = parent.message_text
