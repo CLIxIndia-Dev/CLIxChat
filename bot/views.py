@@ -203,7 +203,7 @@ def on_chat_message(msg):
 
         if not found:
             last_element = Element.objects.get(pk=user.last_node.pk)
-            # print('element name:',last_element.name)
+            print('element name:',last_element.name)
             #
             # if "^" in last_element.message_text:
             #     print("carat found")
@@ -264,6 +264,7 @@ def on_chat_message(msg):
 
     # print('element: ', element)    
     user.last_node=element
+    print('user last node save: ', element.name)
     user.save()
 
 bot = telepot.Bot(TOKEN)
