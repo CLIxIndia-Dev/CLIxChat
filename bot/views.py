@@ -158,7 +158,7 @@ def on_chat_message(msg):
                 element = Element.objects.get(pk=x.pk)
                 # print('element: ', element)
                 msg = element.message_text
-                if msg.startswith("^"):
+                if msg.startswith("^") or last_element.message_text.startswith("^"):
                     msg = msg[1:]
                     print("carat found")
                     last_element = element
