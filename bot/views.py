@@ -77,10 +77,7 @@ def on_chat_message(msg):
         for x in top_level_elements:
             if str.lower(x.name) == "start":
                 element = x
-        #children = element.get_children()
-        #for x in children:
-         #   if x.name is not None:
-          #      buttons.append([KeyboardButton(text=x.name)])
+
         
         # check that the queryset is not empty
         if (Element.objects.filter(level=1)).exists():
@@ -146,6 +143,7 @@ def on_chat_message(msg):
         children = last_element.get_children()
         print("**regular buttons we want to display: ", children)
         found = False
+
         for x in children:
             # print('msg text: ', chat_text)
             # # print('pk: ', x.pk)
@@ -158,12 +156,6 @@ def on_chat_message(msg):
                 element = Element.objects.get(pk=x.pk)
                 # print('element: ', element)
                 msg = element.message_text
-                if msg.startswith("^") or last_element.message_text.startswith("^"):
-                    msg = msg[1:]
-                    print("carat found")
-                    last_element = element
-
-
                 grandchildren = element.get_children()
                 for x in grandchildren:
                     if x.name is not None:
@@ -201,6 +193,15 @@ def on_chat_message(msg):
                                     parse_mode='Markdown',
                             reply_markup=ReplyKeyboardMarkup(
                                         keyboard=buttons))
+
+
+        # if last_element.message_text.startswith("^"):
+        #     msg = "Thank you for the feedback!"
+        # else:
+        #     if msg.startswith("^"):
+        #         msg = msg[1:]
+        #         print("carat found")
+        #         last_element = element
 
 
         if not found:
