@@ -158,6 +158,8 @@ def on_chat_message(msg):
                 element = Element.objects.get(pk=x.pk)
                 # print('element: ', element)
                 msg = element.message_text
+                if "^" in msg:
+                    print("carat found")
 
                 grandchildren = element.get_children()
                 for x in grandchildren:
@@ -200,10 +202,10 @@ def on_chat_message(msg):
 
         if not found:
             last_element = Element.objects.get(pk=user.last_node.pk)
-            print('element name:',last_element.name)
-
-            if "^" in last_element.message_text: 
-                print("carat found")
+            # print('element name:',last_element.name)
+            #
+            # if "^" in last_element.message_text:
+            #     print("carat found")
                     # feedback = chat_text.split("^")[1] # get text after ^
                     # chat_text = feedback # save the message without the ^ in the database
                     # print("FEEDBACK: ",feedback)
