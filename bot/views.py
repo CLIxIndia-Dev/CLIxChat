@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-from django.utils import timezone
+# from django.utils import timezone
 import telepot
 from telepot.namedtuple import InlineKeyboardMarkup, InlineKeyboardButton, ReplyKeyboardMarkup, KeyboardButton
 from clixchat.settings import TOKEN
@@ -54,8 +54,8 @@ def on_chat_message(msg):
 
     user = (User.objects.get_or_create(id=chat_id))[0]
     userID = msg['from']['id']
-    # current_time = datetime.datetime.now() # now() does not include timezone
-    current_time = timezone.now()
+    current_time = datetime.datetime.now() # now() does not include timezone
+    # current_time = timezone.now()
     last = user.last_visit.replace(tzinfo=None) # set tzinfo to none so we can get difference
     hours = (current_time - last).seconds/3600
     seconds = (current_time - last).seconds
