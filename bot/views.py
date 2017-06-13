@@ -158,7 +158,8 @@ def on_chat_message(msg):
                 element = Element.objects.get(pk=x.pk)
                 # print('element: ', element)
                 msg = element.message_text
-                if "^" in msg:
+                if msg.startswith("^"):
+                    msg = msg[1:]
                     print("carat found")
 
                 grandchildren = element.get_children()
