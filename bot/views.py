@@ -200,6 +200,7 @@ def on_chat_message(msg):
 
         if not found:
             last_element = Element.objects.get(pk=user.last_node.pk)
+            print('element name:',last_element.name)
 
             if "^" in last_element.message_text: 
                 print("carat found")
