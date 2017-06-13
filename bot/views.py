@@ -203,8 +203,12 @@ def on_chat_message(msg):
 
 
         if not found:
-            last_element = Element.objects.get(pk=user.last_node.pk)
-            print('element name:',last_element.name)
+            if last_element.msg.startswith("^"):
+                msg_r = "Thank you for your feedback. You can continue to message me to provide futher feedback, or click /start or Back to return."
+            else:
+
+                last_element = Element.objects.get(pk=user.last_node.pk)
+                print('element name:',last_element.name)
             #
             # if "^" in last_element.message_text:
             #     print("carat found")
@@ -245,10 +249,10 @@ def on_chat_message(msg):
 
 
 
-            print("couldn't find chat text: ", chat_text)
-            msg_r = "I'm sorry, I don't understand."
+                print("couldn't find chat text: ", chat_text)
+                msg_r = "I'm sorry, I don't understand."
             # button_list = ["I'm sorry, I don't understand."]
-            bot.sendMessage(chat_id, "I'm sorry, I don't understand.",
+            bot.sendMessage(chat_id, msg_r,
                     reply_markup=ReplyKeyboardMarkup(
                                 keyboard=[[KeyboardButton(text='Back')]]))
 
