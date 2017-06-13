@@ -156,6 +156,10 @@ def on_chat_message(msg):
                 element = Element.objects.get(pk=x.pk)
                 # print('element: ', element)
                 msg = element.message_text
+
+                if msg.startswith("^"):
+                    msg = msg[1:]
+
                 grandchildren = element.get_children()
                 for x in grandchildren:
                     if x.name is not None:
@@ -195,22 +199,23 @@ def on_chat_message(msg):
                                         keyboard=buttons))
 
 
-        # if last_element.message_text.startswith("^"):
-        #     msg = "Thank you for the feedback!"
-        # else:
-        #     if msg.startswith("^"):
-        #         msg = msg[1:]
-        #         print("carat found")
-        #         last_element = element
-
-
         if not found:
-            if last_element.message_text.startswith("^"):
-                msg_r = "Thank you for your feedback. You can continue to message me to provide futher feedback, or click /start or Back to return."
-            else:
 
-                last_element = Element.objects.get(pk=user.last_node.pk)
-                print('element name:',last_element.name)
+
+            if last_element.message_text.startswith("^") or element.message_text.startswith("^"):
+                msg_r = "Thank you for the feedback!"
+            else:
+            # else:
+            #     if msg.startswith("^"):
+            #         msg = msg[1:]
+            #         print("carat found")
+            #         last_element = element
+            #
+            # if last_element.message_text.startswith("^"):
+            #     msg_r = "Thank you for your feedback. You can continue to message me to provide futher feedback, or click /start or Back to return."
+            # else:
+
+
             #
             # if "^" in last_element.message_text:
             #     print("carat found")
@@ -245,12 +250,8 @@ def on_chat_message(msg):
 
 
 
-
-
-
-
-
-
+                last_element = Element.objects.get(pk=user.last_node.pk)
+                # print('element name:',last_element.name)
                 print("couldn't find chat text: ", chat_text)
                 msg_r = "I'm sorry, I don't understand."
             # button_list = ["I'm sorry, I don't understand."]
