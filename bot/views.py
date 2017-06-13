@@ -203,7 +203,7 @@ def on_chat_message(msg):
 
 
         if not found:
-            if last_element.msg.startswith("^"):
+            if last_element.message_text.startswith("^"):
                 msg_r = "Thank you for your feedback. You can continue to message me to provide futher feedback, or click /start or Back to return."
             else:
 
