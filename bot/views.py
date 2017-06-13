@@ -161,6 +161,7 @@ def on_chat_message(msg):
                 if msg.startswith("^"):
                     msg = msg[1:]
                     print("carat found")
+                    last_element = element
 
                 grandchildren = element.get_children()
                 for x in grandchildren:
