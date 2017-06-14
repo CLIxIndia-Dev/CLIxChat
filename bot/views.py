@@ -145,16 +145,9 @@ def on_chat_message(msg):
         found = False
 
         for x in children:
-            # print('msg text: ', chat_text)
-            # # print('pk: ', x.pk)
-            print('**obj name: ', x.name)
-            
             if x.name == chat_text:
                 found = True
-                # print('msg name: ', x.name)
-                # print('pk: ', x.pk)
                 element = Element.objects.get(pk=x.pk)
-                # print('element: ', element)
                 msg = element.message_text
 
                 if msg.startswith("^"):
@@ -201,10 +194,20 @@ def on_chat_message(msg):
 
         if not found:
 
+            print('element name:',last_element.name)
 
             if last_element.message_text.startswith("^") or element.message_text.startswith("^"):
                 msg_r = "Thank you for the feedback!"
             else:
+                last_element = Element.objects.get(pk=user.last_node.pk)
+
+                print("couldn't find chat text: ", chat_text)
+                msg_r = "I'm sorry, I don't understand."
+            # button_list = ["I'm sorry, I don't understand."]
+            buttons.append([KeyboardButton(text='Back')])
+            bot.sendMessage(chat_id, msg_r,
+                    reply_markup=ReplyKeyboardMarkup(
+                                keyboard=[[KeyboardButton(text='Back')]]))
             # else:
             #     if msg.startswith("^"):
             #         msg = msg[1:]
@@ -250,14 +253,6 @@ def on_chat_message(msg):
 
 
 
-                last_element = Element.objects.get(pk=user.last_node.pk)
-                # print('element name:',last_element.name)
-                print("couldn't find chat text: ", chat_text)
-                msg_r = "I'm sorry, I don't understand."
-            # button_list = ["I'm sorry, I don't understand."]
-            bot.sendMessage(chat_id, msg_r,
-                    reply_markup=ReplyKeyboardMarkup(
-                                keyboard=[[KeyboardButton(text='Back')]]))
 
     #print("user, msg_s, msg_r, msg_pk, button_list, start_time", userID, chat_text, msg_r, msg_pk, button_list, current_time)
 
