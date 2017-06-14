@@ -152,6 +152,7 @@ def on_chat_message(msg):
 
                 if msg.startswith("^"):
                     msg = msg[1:]
+                    last_element = element
 
                 grandchildren = element.get_children()
                 for x in grandchildren:
@@ -194,7 +195,8 @@ def on_chat_message(msg):
 
         if not found:
 
-            print('element name:',last_element.name)
+            print('last element name:',last_element.name)
+            print('element name:',element.name)
 
             if last_element.message_text.startswith("^") or element.message_text.startswith("^"):
                 msg_r = "Thank you for the feedback!"
