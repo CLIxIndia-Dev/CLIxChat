@@ -25,7 +25,8 @@ SECRET_KEY = '_3tesle#!i$x)yls=q#)ozo5hirb0@4shvap84ojdwhn%0ctc8'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['clixchat.herokuapp.com',
+ALLOWED_HOSTS = ['miti.tiss.edu',
+                 'clixchat.herokuapp.com',
                  'localhost',
                  '127.0.0.1',
                  '103.36.84.150',
@@ -93,7 +94,7 @@ else:
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
             'NAME': 'clixchat',
-            'USER': '',
+            'USER': 'root',
             'PASSWORD': '',
             'HOST': '',                   # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
             'PORT': '',                   # Set to empty string for default.
@@ -162,3 +163,25 @@ STATICFILES_DIRS = (
     os.path.join(PROJECT_ROOT, 'static'),
 )
 
+# Logging
+# https://docs.djangoproject.com/en/1.10/topics/logging/
+LOGGING = {
+    'version': 1, # Note this is the logger version, not unplatform version
+    'disable_existing_loggers': False,
+    'handlers': {
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': '/var/log/clixchat/debug.log',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['file'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+    },
+}
+
+VERSION='1.0'
