@@ -290,8 +290,8 @@ bot = telepot.Bot(TOKEN)
 logger = logging.getLogger('bot')
 
 def index(request):
-    logger.info('request get:', request.GET)
-    logger.info('request body:', request.body)
+    logger.info(request.GET)
+    logger.info(request.body)
     # update_queue.put(request.body)  # pass update to bot
     # webhook.feed(request.body)
     return HttpResponse("Hello, world. You're at the bot index.")
