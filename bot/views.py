@@ -50,9 +50,9 @@ def geturl(ext, x, buttons, chat_id):
 
 
 def on_chat_message(msg):
-    logger.error('on_chat_message called')
+    logger.info('on_chat_message called')
     content_type, chat_type, chat_id = telepot.glance(msg)
-    logger.error('Chat Message: ', content_type, chat_type, chat_id)
+    logger.info('Chat Message: ', content_type, chat_type, chat_id)
 
     user = (User.objects.get_or_create(id=chat_id))[0]
     userID = msg['from']['id']
@@ -286,12 +286,12 @@ bot = telepot.Bot(TOKEN)
 
 
 bot = telepot.Bot(TOKEN)
-# webhook = OrderedWebhook(bot, {'chat': on_chat_message})
+webhook = OrderedWebhook(bot, {'chat': on_chat_message})
 logger = logging.getLogger('bot')
 
 def index(request):
     logger.info(request.GET)
     logger.info(request.body)
     # update_queue.put(request.body)  # pass update to bot
-    # webhook.feed(request.body)
+    webhook.feed(request.body)
     return HttpResponse("Hello, world. You're at the bot index.")
