@@ -293,6 +293,7 @@ def index(request):
     # logger.info(request.body)
     # if request.POST:
     #     logger.info(webhook)
+    logger.info(update_queue)
     try:
         # logger.info(request.body)
         # json_object = json.loads(request.body)
