@@ -285,10 +285,7 @@ bot = telepot.Bot(TOKEN)
 
 
 bot = telepot.Bot(TOKEN)
-webhook = OrderedWebhook(bot, {'chat': on_chat_message,
-                               'callback_query': on_callback_query,
-                               'inline_query': on_inline_query,
-                               'chosen_inline_result': on_chosen_inline_result})
+webhook = OrderedWebhook(bot, {'chat': on_chat_message})
 
 
 def index(request):
