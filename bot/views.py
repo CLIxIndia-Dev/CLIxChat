@@ -10,7 +10,7 @@ import re
 #import pytz
 # from django.shortcuts import get_object_or_404
 from telepot.loop import OrderedWebhook
-
+import logging
 
 """
 Webhook manually set command via curl:
@@ -50,8 +50,9 @@ def geturl(ext, x, buttons, chat_id):
 
 
 def on_chat_message(msg):
+    logger.error('on_chat_message called')
     content_type, chat_type, chat_id = telepot.glance(msg)
-    print('Chat Message: ', content_type, chat_type, chat_id)
+    logger.error('Chat Message: ', content_type, chat_type, chat_id)
 
     user = (User.objects.get_or_create(id=chat_id))[0]
     userID = msg['from']['id']
@@ -286,10 +287,11 @@ bot = telepot.Bot(TOKEN)
 
 bot = telepot.Bot(TOKEN)
 webhook = OrderedWebhook(bot, {'chat': on_chat_message})
-
+logger = logging.getLogger(__name__)
 
 def index(request):
-    print('request post:', request.GET)
+    logger.error('request get:', request.GET)
+    logger.error('request body:', request.BODY)
     # update_queue.put(request.body)  # pass update to bot
     webhook.feed(request.body)
     return HttpResponse("Hello, world. You're at the bot index.")
