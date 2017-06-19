@@ -291,5 +291,5 @@ webhook = OrderedWebhook(bot, {'chat': on_chat_message})
 def index(request):
     print('request post:', request.GET)
     # update_queue.put(request.body)  # pass update to bot
-    webhook.feed(request.data)
+    webhook.feed(request.body)
     return HttpResponse("Hello, world. You're at the bot index.")
