@@ -290,7 +290,8 @@ bot = telepot.Bot(TOKEN)
 logger = logging.getLogger(__name__)
 
 def index(request):
-
+    logger.debug('index called')
+    logger.debug(request)
     logger.debug('request get:', request.GET)
     logger.debug('request body:', request.body)
     # update_queue.put(request.body)  # pass update to bot
