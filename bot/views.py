@@ -299,7 +299,7 @@ def index(request):
         bod = request.body
         bod = bod.decode("utf-8")
         logger.info(bod)
-        bod = json.loads(bod)
+        bod = json.dumps(bod)
 
         logger.info('req')
         webhook.feed(bod)
