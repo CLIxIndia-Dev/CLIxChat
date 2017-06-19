@@ -291,7 +291,7 @@ logger = logging.getLogger(__name__)
 
 def index(request):
     logger.error('request get:', request.GET)
-    logger.error('request body:', request.BODY)
+    logger.error('request body:', request.body)
     # update_queue.put(request.body)  # pass update to bot
-    webhook.feed(request.body)
+    # webhook.feed(request.body)
     return HttpResponse("Hello, world. You're at the bot index.")
