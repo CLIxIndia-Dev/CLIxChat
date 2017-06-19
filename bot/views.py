@@ -287,17 +287,11 @@ bot = telepot.Bot(TOKEN)
 
 bot = telepot.Bot(TOKEN)
 # webhook = OrderedWebhook(bot, {'chat': on_chat_message})
-logger = logging.getLogger(__name__)
+logger = logging.getLogger('bot')
 
 def index(request):
-    logger.debug("debug")
-    logger.info("info")
-    logger.warn("warn")
-    logger.error("error")
-    logger.debug('index called')
-    logger.debug(request)
-    logger.debug('request get:', request.GET)
-    logger.debug('request body:', request.body)
+    logger.info('request get:', request.GET)
+    logger.info('request body:', request.body)
     # update_queue.put(request.body)  # pass update to bot
     # webhook.feed(request.body)
     return HttpResponse("Hello, world. You're at the bot index.")
