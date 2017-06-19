@@ -51,6 +51,7 @@ def geturl(ext, x, buttons, chat_id):
 
 def on_chat_message(msg):
     logger.info('on_chat_message called')
+    logger.info(msg)
     content_type, chat_type, chat_id = telepot.glance(msg)
     logger.info('Chat Message: ', content_type, chat_type, chat_id)
 
