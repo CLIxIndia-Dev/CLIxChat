@@ -9,6 +9,7 @@ import datetime
 import re
 #import pytz
 # from django.shortcuts import get_object_or_404
+from telepot.loop import OrderedWebhook
 
 
 """
@@ -273,7 +274,7 @@ def on_chat_message(msg):
     user.save()
 
 bot = telepot.Bot(TOKEN)
-update_queue = Queue()  # channel between `app` and `bot`
+# update_queue = Queue()  # channel between `app` and `bot`
 
 bot.message_loop({'chat': on_chat_message #,
                   # 'callback_query': on_callback_query,
@@ -281,8 +282,17 @@ bot.message_loop({'chat': on_chat_message #,
                   # 'chosen_inline_result': on_chosen_inline_result
                   }, source=update_queue)  # take updates from queue
 
-def index(request):
 
+
+bot = telepot.Bot(TOKEN)
+webhook = OrderedWebhook(bot, {'chat': on_chat_message,
+                               'callback_query': on_callback_query,
+                               'inline_query': on_inline_query,
+                               'chosen_inline_result': on_chosen_inline_result})
+
+
+def index(request):
     print('request post:', request.GET)
-    update_queue.put(request.body)  # pass update to bot
+    # update_queue.put(request.body)  # pass update to bot
+    webhook.feed(request.data)
     return HttpResponse("Hello, world. You're at the bot index.")
