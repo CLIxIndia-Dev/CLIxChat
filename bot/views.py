@@ -275,23 +275,31 @@ def on_chat_message(msg):
     user.save()
 
 bot = telepot.Bot(TOKEN)
-# update_queue = Queue()  # channel between `app` and `bot`
-#
-# bot.message_loop({'chat': on_chat_message #,
-#                   # 'callback_query': on_callback_query,
-#                   # 'inline_query': on_inline_query,
-#                   # 'chosen_inline_result': on_chosen_inline_result
-#                   }, source=update_queue)  # take updates from queue
+update_queue = Queue()  # channel between `app` and `bot`
+
+bot.message_loop({'chat': on_chat_message #,
+                  # 'callback_query': on_callback_query,
+                  # 'inline_query': on_inline_query,
+                  # 'chosen_inline_result': on_chosen_inline_result
+                  }, source=update_queue)  # take updates from queue
 
 
-
-bot = telepot.Bot(TOKEN)
-webhook = OrderedWebhook(bot, {'chat': on_chat_message})
+# webhook = OrderedWebhook(bot, {'chat': on_chat_message})
 logger = logging.getLogger('bot')
 
+
 def index(request):
-    logger.info(request.GET)
-    logger.info(request.body)
-    # update_queue.put(request.body)  # pass update to bot
-    webhook.feed(request.body)
+    logger.info(request.POST)
+    # logger.info(request.body)
+    # if request.POST:
+    #     logger.info(webhook)
+    try:
+        # logger.info(request.body)
+        # json_object = json.loads(request.body)
+        # logger.info('json')
+        update_queue.put(request.body)  # pass update to bot
+    except TypeError:
+        logger.info('update queue error')
+
+    # webhook.feed(request.body)
     return HttpResponse("Hello, world. You're at the bot index.")
