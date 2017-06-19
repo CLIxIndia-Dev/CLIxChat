@@ -275,12 +275,12 @@ def on_chat_message(msg):
 
 bot = telepot.Bot(TOKEN)
 # update_queue = Queue()  # channel between `app` and `bot`
-
-bot.message_loop({'chat': on_chat_message #,
-                  # 'callback_query': on_callback_query,
-                  # 'inline_query': on_inline_query,
-                  # 'chosen_inline_result': on_chosen_inline_result
-                  }, source=update_queue)  # take updates from queue
+#
+# bot.message_loop({'chat': on_chat_message #,
+#                   # 'callback_query': on_callback_query,
+#                   # 'inline_query': on_inline_query,
+#                   # 'chosen_inline_result': on_chosen_inline_result
+#                   }, source=update_queue)  # take updates from queue
 
 
 
