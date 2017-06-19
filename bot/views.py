@@ -286,7 +286,7 @@ bot = telepot.Bot(TOKEN)
 
 
 bot = telepot.Bot(TOKEN)
-webhook = OrderedWebhook(bot, {'chat': on_chat_message})
+# webhook = OrderedWebhook(bot, {'chat': on_chat_message})
 logger = logging.getLogger(__name__)
 
 def index(request):
