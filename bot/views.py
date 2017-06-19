@@ -290,6 +290,10 @@ bot = telepot.Bot(TOKEN)
 logger = logging.getLogger(__name__)
 
 def index(request):
+    logger.debug("debug")
+    logger.info("info")
+    logger.warn("warn")
+    logger.error("error")
     logger.debug('index called')
     logger.debug(request)
     logger.debug('request get:', request.GET)
