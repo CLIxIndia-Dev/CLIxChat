@@ -54,7 +54,7 @@ def on_chat_message(msg):
     # x = msg['chat']['id']
     logger.info(type(msg))
     logger.info(msg)
-    msg = json.loads(msg)
+    # msg = json.loads(msg)
 
 
     content_type, chat_type, chat_id = telepot.glance(msg)
