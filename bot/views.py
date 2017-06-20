@@ -300,8 +300,6 @@ import codecs
 
 import json
 def index(request):
-    logger.info('TOKEN: ' + TOKEN)
-
     try:
         bod = request.body
         bod = bod.decode("utf-8")
@@ -309,7 +307,8 @@ def index(request):
         bod = json.loads(bod)
 
         logger.info('req')
-        webhook.feed(bod)
+        on_chat_message(bod)
+        # webhook.feed(bod)
     except ValueError:
         logger.info('GET requested')
 
