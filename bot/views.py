@@ -51,11 +51,10 @@ def geturl(ext, x, buttons, chat_id):
 
 def on_chat_message(msg):
     logger.info('on_chat_message called')
-    x = msg['chat']['id']
+    # x = msg['chat']['id']
     logger.info(type(msg))
     logger.info(msg)
-    # msg = json.loads(msg)
-    logger.info(x)
+    msg = json.loads(msg)
 
 
     content_type, chat_type, chat_id = telepot.glance(msg)
