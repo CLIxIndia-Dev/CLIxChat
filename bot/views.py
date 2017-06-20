@@ -51,7 +51,6 @@ def geturl(ext, x, buttons, chat_id):
 
 def on_chat_message(msg):
     logger.info('on_chat_message called')
-    logger.info('TOKEN: ' + TOKEN)
     x = msg['chat']['id']
     logger.info(type(msg))
     logger.info(msg)
@@ -301,6 +300,7 @@ import codecs
 
 import json
 def index(request):
+    logger.info('TOKEN: ' + TOKEN)
 
     try:
         bod = request.body
