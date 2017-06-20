@@ -53,8 +53,6 @@ def on_chat_message(msg):
     logger.info('on_chat_message called')
 
     #  fix for stripping out message queueing
-    msg = json.dumps(msg)
-    msg = json.loads(msg)
     msg = msg['message']
 
 
