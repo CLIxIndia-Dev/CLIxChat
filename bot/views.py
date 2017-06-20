@@ -54,10 +54,14 @@ def on_chat_message(msg):
     logger.info(type(msg))
     logger.info(msg)
     msg = json.loads(msg)
-    content_type, chat_type, chat_id = telepot.glance(msg)
-    logger.info('Chat Message: ', content_type, chat_type, chat_id)
+    logger.info(msg['chat']['id'])
+
     logger.info('TOKEN')
     logger.info(TOKEN)
+
+    content_type, chat_type, chat_id = telepot.glance(msg)
+    logger.info('Chat Message: ', content_type, chat_type, chat_id)
+
     user = (User.objects.get_or_create(id=chat_id))[0]
     userID = msg['from']['id']
     current_time = datetime.datetime.now() # now() does not include timezone
