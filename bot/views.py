@@ -11,6 +11,7 @@ import re
 # from django.shortcuts import get_object_or_404
 from telepot.loop import OrderedWebhook
 import logging
+import sys
 
 """
 Webhook manually set command via curl:
@@ -30,7 +31,7 @@ def geturl(ext, x, buttons, chat_id):
     result = re.search('((http[s]?):\/)?\/?([^:\/\s]+)((\/\w+)*\/)([\w\-\.]+[^#?\s]+)(' + ext + ')', x)
     fileurl = result.group(0) # just the url
     caption_txt = x.replace(fileurl, "")
-    
+
     if ext == ".pdf" or ext == ".gif":
         bot.sendDocument(chat_id, document = fileurl,
                          caption = caption_txt,
@@ -50,14 +51,20 @@ def geturl(ext, x, buttons, chat_id):
 
 
 def on_chat_message(msg):
-    logger.info('on_chat_message called')
-
+    print('on_chat_message called')
+    print('python version: ', sys.version_info[0])
     #  fix for stripping out message queueing
+    print('arg: ', msg)
+    print('type: ', type(msg))
     msg = msg['message']
 
-
+    print('msg: ', msg)
     content_type, chat_type, chat_id = telepot.glance(msg)
-    logger.info('Chat Message: ', content_type, chat_type, chat_id)
+    print('Chat Message: ', content_type, chat_type, chat_id)
+    if content_type == 'emoji' or content_type == 'contact' or content_type == 'sticker' or content_type == 'file' or content_type == 'chat':
+        print('non text message recieved: ', content_type)
+        bot.sendMessage(chat_id, "I'm sorry, I don't understand.", reply_markup=ReplyKeyboardMarkup(keyboard=[[KeyboardButton(text='Restart')]]))
+        return
 
     user = (User.objects.get_or_create(id=chat_id))[0]
     userID = msg['from']['id']
@@ -85,7 +92,6 @@ def on_chat_message(msg):
             if str.lower(x.name) == "start":
                 element = x
 
-        
         # check that the queryset is not empty
         if (Element.objects.filter(level=1)).exists():
             children = (Element.objects.filter(level=1))
@@ -113,7 +119,7 @@ def on_chat_message(msg):
         msg_pk = user.last_node.pk
         print("buttons we want to display when we click back: ", children)
         found = True
-        for x in children: 
+        for x in children:
            if x.name is not None:
                button_list.append(x.name)
                buttons.append([KeyboardButton(text=x.name)])
@@ -130,14 +136,11 @@ def on_chat_message(msg):
 
         element = parent
         msg = parent.message_text
-                
+
         bot.sendMessage(chat_id, msg,
                         parse_mode='Markdown',
                         reply_markup=ReplyKeyboardMarkup(
                             keyboard=buttons))
-
-
-
 
 
     # not /start or back
@@ -177,27 +180,34 @@ def on_chat_message(msg):
                             buttons.append([KeyboardButton(text=x.name)])
                 buttons.append([KeyboardButton(text='Back')])
                 # print('buttons: ', buttons)
-                    
+                if type(msg) != str or len(msg) == 0:
+                    print('empty message found, trying to fix...')
+                    msg = '?'
+
                 msg = msg.split("~")
-                
+
                 for x in msg:
+                    if type(x) != str or len(x) == 0:
+                        print('empty substring, trying to fix...')
+                        x = '?'
+
                     msg_r = x
-                    
                     if (".pdf" in x):
                         geturl(".pdf", x, buttons, chat_id)
                     elif (".mp3" in x):
-                        geturl(".mp3", x, buttons, chat_id)                     
+                        geturl(".mp3", x, buttons, chat_id)
                     elif (".jpg" in x):
                         geturl(".jpg", x, buttons, chat_id)
                     elif (".png" in x):
-                        geturl(".png", x, buttons, chat_id)                   
+                        geturl(".png", x, buttons, chat_id)
                     elif (".gif" in x):
                         geturl(".gif", x, buttons, chat_id)
                     else:
-                        bot.sendMessage(chat_id, x,
-                                    parse_mode='Markdown',
-                            reply_markup=ReplyKeyboardMarkup(
-                                        keyboard=buttons))
+                        print('buttons: ', buttons)
+                        print('chat id: ', chat_id)
+                        print('message: ', x)
+                        print('msg type: ', type(x))
+                        bot.sendMessage(chat_id, x, parse_mode='Markdown', reply_markup=ReplyKeyboardMarkup(keyboard=buttons))
 
 
         if not found:
@@ -263,7 +273,7 @@ def on_chat_message(msg):
 
 
 
-    #print("user, msg_s, msg_r, msg_pk, button_list, start_time", userID, chat_text, msg_r, msg_pk, button_list, current_time)
+    print("user, msg_s, msg_r, msg_pk, button_list, start_time", user, chat_text, msg_r, msg_pk, button_list, current_time)
 
     interaction = Interaction(user = user,
                               msg_s = chat_text,
