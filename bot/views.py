@@ -136,6 +136,9 @@ def on_chat_message(msg):
 
         element = parent
         msg = parent.message_text
+        if type(msg) != str or len(msg) == 0:
+            print('empty message found in parent, trying to fix...')
+            msg = '?'
 
         bot.sendMessage(chat_id, msg,
                         parse_mode='Markdown',
