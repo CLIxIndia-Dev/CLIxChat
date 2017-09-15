@@ -61,7 +61,7 @@ def on_chat_message(msg):
     print('msg: ', msg)
     content_type, chat_type, chat_id = telepot.glance(msg)
     print('Chat Message: ', content_type, chat_type, chat_id)
-    if content_type == 'emoji' or content_type == 'contact' or content_type == 'sticker' or content_type == 'file' or content_type == 'chat':
+    if content_type != 'text':
         print('non text message recieved: ', content_type)
         bot.sendMessage(chat_id, "I'm sorry, I don't understand.", reply_markup=ReplyKeyboardMarkup(keyboard=[[KeyboardButton(text='Restart')]]))
         return
