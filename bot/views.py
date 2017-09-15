@@ -27,9 +27,11 @@ links = {'course':'https://www.merriam-webster.com/dictionary/course',
 # Helper function for on_chat_message that
 # gets the url and sends it accordingly
 def geturl(ext, x, buttons, chat_id):
+    print('geturl called')
     # regex adapted from http://www.regextester.com/20
     result = re.search('((http[s]?):\/)?\/?([^:\/\s]+)((\/\w+)*\/)([\w\-\.]+[^#?\s]+)(' + ext + ')', x)
     fileurl = result.group(0) # just the url
+    print("url: ", fileurl)
     caption_txt = x.replace(fileurl, "")
 
     if ext == ".pdf" or ext == ".gif":
@@ -195,6 +197,12 @@ def on_chat_message(msg):
                         x = '?'
 
                     msg_r = x
+
+                    print('buttons: ', buttons)
+                    print('chat id: ', chat_id)
+                    print('message: ', x)
+                    print('msg type: ', type(x))
+
                     if (".pdf" in x):
                         geturl(".pdf", x, buttons, chat_id)
                     elif (".mp3" in x):
@@ -206,10 +214,6 @@ def on_chat_message(msg):
                     elif (".gif" in x):
                         geturl(".gif", x, buttons, chat_id)
                     else:
-                        print('buttons: ', buttons)
-                        print('chat id: ', chat_id)
-                        print('message: ', x)
-                        print('msg type: ', type(x))
                         bot.sendMessage(chat_id, x, parse_mode='Markdown', reply_markup=ReplyKeyboardMarkup(keyboard=buttons))
 
 
