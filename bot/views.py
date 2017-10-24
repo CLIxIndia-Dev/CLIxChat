@@ -134,7 +134,7 @@ def on_chat_message(msg):
             msg = '?'
 
         bot.sendMessage(chat_id, msg,
-                        parse_mode='Markdown',
+                        # parse_mode='Markdown',
                         reply_markup=ReplyKeyboardMarkup(
                             keyboard=buttons))
 
@@ -205,7 +205,8 @@ def on_chat_message(msg):
                     elif (".gif" in x):
                         geturl(".gif", x, buttons, chat_id)
                     else:
-                        bot.sendMessage(chat_id, x, parse_mode='Markdown',
+                        bot.sendMessage(chat_id, x,
+                                        # parse_mode='Markdown',
                                         reply_markup=ReplyKeyboardMarkup(keyboard=buttons))
 
         if not found:
