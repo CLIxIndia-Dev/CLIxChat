@@ -15,10 +15,6 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
-
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '_3tesle#!i$x)yls=q#)ozo5hirb0@4shvap84ojdwhn%0ctc8'
 
@@ -31,7 +27,6 @@ ALLOWED_HOSTS = ['miti.tiss.edu',
                  '127.0.0.1',
                  '103.36.84.150',
                  '18.111.74.240']
-
 
 # Application definition
 
@@ -77,12 +72,17 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'clixchat.wsgi.application'
 
+# """
+# Webhook manually set command via curl:
+# curl -F "url=https://<YOURDOMAIN.EXAMPLE>/<WEBHOOKLOCATION>" https://api.telegram.org/bot<YOURTOKEN>/setWebhook
+# """
+
 TOKEN = os.environ['TELEGRAM_KEY']
 
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 
-if (TOKEN=='test'):
+if TOKEN == 'test':
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
@@ -96,21 +96,21 @@ else:
             'NAME': 'clixchat',
             'USER': 'root',
             'PASSWORD': '',
-            'HOST': '',                   # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
-            'PORT': '',                   # Set to empty string for default.
+            'HOST': '',  # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
+            'PORT': '',  # Set to empty string for default.
         }
     }
 
     # Parse database configuration from $DATABASE_URL
     import dj_database_url
+
     dbconfig = dj_database_url.config()
     if dbconfig:
-        DATABASES['default'] =  dbconfig
+        DATABASES['default'] = dbconfig
 
     # Honor the 'X-Forwarded-Proto' header for request.is_secure()
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-    SECURE_SSL_REDIRECT=True
-
+    SECURE_SSL_REDIRECT = True
 
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
@@ -130,7 +130,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
 
@@ -143,7 +142,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
@@ -166,7 +164,7 @@ STATICFILES_DIRS = (
 # Logging
 # https://docs.djangoproject.com/en/1.10/topics/logging/
 LOGGING = {
-    'version': 1, # Note this is the logger version, not unplatform version
+    'version': 1,  # Note this is the logger version, not unplatform version
     'disable_existing_loggers': False,
     'handlers': {
         'file': {
@@ -189,4 +187,4 @@ LOGGING = {
     },
 }
 
-VERSION='1.0'
+VERSION = '1.0'
