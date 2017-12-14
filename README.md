@@ -69,7 +69,7 @@ and logs to `/var/log/nginx/`
 
 ### Certbot Certificates
 
-Telegram communicates over HTTPS. Certbot provides signed ssl certificates so Telegram's API can just be pointed at https://<your web address>/bot/ 
+Telegram communicates over HTTPS. Certbot provides signed ssl certificates so Telegram's API can just be pointed at https://<your-web-address\>/bot/ 
 
 `$ curl -F "url=https://<your web address>/bot/" https://api.telegram.org/bot<bot token>/setWebhook`
 
