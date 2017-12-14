@@ -71,7 +71,7 @@ and logs to `/var/log/nginx/`
 
 Telegram communicates over HTTPS. Certbot provides signed ssl certificates so Telegram's API can just be pointed at https://<your-web-address\>/bot/ 
 
-`$ curl -F "url=https://<your web address>/bot/" https://api.telegram.org/bot<bot token>/setWebhook`
+`$ curl -F "url=https://<your web address>/bot/" https://api.telegram.org/bot<bot-token>/setWebhook`
 
 Information about Telegram & CLIxChat's interactions can be found here:
 https://api.telegram.org/bot<bot-token\>/getWebhookInfo
@@ -105,8 +105,4 @@ https://miti.tiss.edu/admin/auth/user/
 ### Backup
 
 Last of all, the server has a backup cron job that both exports data as csv files for analysis and as sql dumps in case a database restoration is needed.
-These jobs are located at /var/clixchat/backup.sh and in cron.
-
-To retrieve the csv files for analysis, run:
-
-`$ scp user@103.36.84.150:/var/clixchat/backups/*.csv ~`
+These jobs are located at `/var/clixchat/backup.sh` and in cron.
