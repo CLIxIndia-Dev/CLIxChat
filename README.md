@@ -1,7 +1,6 @@
 # MiTi server information
 
-Postgresql, NGINX, uWSGI, & certbot were all installed normally via apt-get.
-and CLIxChat was cloned into `/var/clixchat/CLIxChat`. 
+Postgresql, NGINX, uWSGI, & certbot were all installed normally via apt-get and CLIxChat was cloned into `/var/clixchat/CLIxChat`. 
 
 ### CLIxChat
 CLIxChat is written in Python 3.5 and depends on django-mptt to provide dialog trees and telepot to handle communicating with Telegram's bot API. Those and all other relevant python packages are available to be installed from requirements.txt:
