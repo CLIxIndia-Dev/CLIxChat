@@ -112,8 +112,12 @@ These jobs are located at `/var/clixchat/backup.sh` and in cron.
 MiTi logs the following data:
 
 telegram's unique user #
+
 message or button that was sent to MiTi by user along with timestamp
+
 message that MiTi responded back along with timestamp
+
 message location in conversation tree (primary key)
+
 buttons that are available for user to press
 
