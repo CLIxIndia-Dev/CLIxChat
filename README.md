@@ -106,3 +106,14 @@ https://miti.tiss.edu/admin/auth/user/
 
 Last of all, the server has a backup cron job that both exports data as csv files for analysis and as sql dumps in case a database restoration is needed.
 These jobs are located at `/var/clixchat/backup.sh` and in cron.
+
+### Logging
+
+MiTi logs the following data:
+
+telegram's unique user #
+message or button that was sent to MiTi by user along with timestamp
+message that MiTi responded back along with timestamp
+message location in conversation tree (primary key)
+buttons that are available for user to press
+
